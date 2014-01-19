@@ -1,0 +1,15 @@
+{
+	"installed_packages":
+	[
+		"CoffeeScript",
+		"Cucumber",
+		"Gherkin (Cucumber) Formatter",
+		"GitGutter",
+		"LoremIpsum",
+		"Package Control",
+		"Ruby Block Converter",
+		"SCSS",
+		"Theme - itg.flat",
+		"TrailingSpaces"
+	]
+}

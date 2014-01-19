@@ -1,0 +1,41 @@
+#
+# This file should sit along-side ~/.gitconfig, and contains "global" configuration
+# settings that are universal across machines.
+#
+# Place overriding settings in ~/.gitconfig, and ensure that you include this file:
+#
+# [include]
+#	path = ~/.gitconfig-global
+#
+# For convenience, this file provides a global-config alias to add configuration
+# settings to this file:
+#
+#   git global-config ARGS
+#
+
+[user]
+	name = Adam Prescott
+	email = adam@aprescott.com
+[rebase]
+	autosquash = true
+[color]
+	ui = true
+[alias]
+	st = status
+	log-graph = log --graph --oneline --decorate --all
+	delete-merged-branches = !git branch --merged | grep -v '^\\*' | grep -v '\\bmaster\\b' | sed -e 's/^ *//g' | tr '\\n' '\\0' | xargs -0 git branch -d
+	redo-commit = commit --amend --reset-author -C HEAD
+	global-config = "!git config --file ~/.gitconfig-global"
+[help]
+	autocorrect = 1
+[push]
+	default = simple
+[merge]
+	tool = p4mergetool
+	keepBackup = false
+	keepTemporaries = false
+[mergetool "p4mergetool"]
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $PWD/$BASE $PWD/$REMOTE $PWD/$LOCAL $PWD/$MERGED
+	trustExitCode = false
+	keepBackup = false
+	keepTemporaries = false

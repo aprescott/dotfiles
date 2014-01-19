@@ -1,0 +1,25 @@
+# prompt
+RED="\[\033[0;31m\]"
+YELLOW="\[\033[0;33m\]"
+GREEN="\[\033[0;32m\]"
+CYAN="\[\033[0;36m\]"
+PURPLE="\[\033[0;35m\]"
+DECOLOR="\[\e[0m\]"
+
+reset_style='\[\033[00m\]'
+status_style=$reset_style'\[\033[0;90m\]'
+prompt_style=$reset_style'\[\033[0;90m\]'
+command_style=$reset_style'\[\033[1;29m\]'
+
+# Prompt variable:
+OLD_PS1="$PS1"
+
+# we might not have git completion available, so squealch the missing
+# command error.
+if ! command -v __git_ps1 > /dev/null; then
+    function __git_ps1 {
+        echo > /dev/null
+    }
+fi
+
+PS1="$status_style""$prompt_style\u@\h:$YELLOW\w\[\033[1;33m\]\$(__git_ps1 '::%s')$prompt_style\$ $command_style"
