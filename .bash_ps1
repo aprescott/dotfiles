@@ -1,13 +1,7 @@
-# prompt
-RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
-GREEN="\[\033[0;32m\]"
-CYAN="\[\033[0;36m\]"
-PURPLE="\[\033[0;35m\]"
-DECOLOR="\[\e[0m\]"
+YELLOW_BOLD="\[\033[1;33m\]"
 
 reset_style='\[\033[00m\]'
-status_style=$reset_style'\[\033[0;90m\]'
 prompt_style=$reset_style'\[\033[0;90m\]'
 command_style=$reset_style'\[\033[1;29m\]'
 
@@ -22,4 +16,4 @@ if ! command -v __git_ps1 > /dev/null; then
     }
 fi
 
-PS1="$status_style""$prompt_style\u@\h:$YELLOW\w\[\033[1;33m\]\$(__git_ps1 '::%s')$prompt_style\$ $command_style"
+PS1="$prompt_style\w\$(__git_ps1 '$YELLOW_BOLD::%s')$prompt_style\$ $reset_style"

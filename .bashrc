@@ -86,10 +86,3 @@ if $interactive_shell; then
 	    . /etc/bash_completion
 	fi
 fi # end interactive-specifics
-
-if ! command -v chruby_trap > /dev/null; then
-	echo "chruby_trap not defined! see https://github.com/postmodern/chruby/issues/227" 1>&2
-fi
-
-# Reset color for command output and call chruby's trap function
-trap 'echo -ne "\033[0m" && chruby_trap' DEBUG
