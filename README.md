@@ -18,6 +18,13 @@ Git config:
 # Any other non-global, overriding settings below
 ```
 
+SSH starting config (until [`.ssh/config` supports config includes](https://bugzilla.mindrot.org/show_bug.cgi?id=1585))
+
+```
+ServerAliveCountMax 15
+ServerAliveInterval 3
+```
+
 SublimeText 2 preferences:
 
 Arch:
