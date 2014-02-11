@@ -4,6 +4,7 @@
 		"CoffeeScript",
 		"Cucumber",
 		"Gherkin (Cucumber) Formatter",
+		"GitCommitMsg",
 		"GitGutter",
 		"LoremIpsum",
 		"Package Control",
