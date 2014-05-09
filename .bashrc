@@ -44,7 +44,7 @@ for f in "${files_to_source[@]}"; do
 	fi
 done
 
-DEFAULT_RUBY="ruby-2.1.1"
+DEFAULT_RUBY="ruby-2.1.2"
 if command -v chruby > /dev/null; then
   chruby "$DEFAULT_RUBY"
 fi
