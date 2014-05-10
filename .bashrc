@@ -49,6 +49,13 @@ if command -v chruby > /dev/null; then
   chruby "$DEFAULT_RUBY"
 fi
 
+# Get npm to put stuff into ~ as "global"
+# So I don't have to chown npm's prefix.
+NPM_PACKAGES=~/.npm-packages
+export PATH=$NPM_PACKAGES/bin:$PATH
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+
 interactive_shell=false
 if [ -n "$PS1" ]; then
 	interactive_shell=true
