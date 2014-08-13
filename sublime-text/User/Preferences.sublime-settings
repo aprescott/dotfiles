@@ -6,8 +6,7 @@
 	"ignored_packages":
 	[
 		"Vintage",
-		"Markdown",
-		"GitGutter"
+		"Markdown"
 	],
 	"rulers":
 	[
