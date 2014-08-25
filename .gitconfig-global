@@ -40,3 +40,5 @@
 	trustExitCode = false
 	keepBackup = false
 	keepTemporaries = false
+[tag]
+	sort = version:refname
