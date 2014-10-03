@@ -25,14 +25,14 @@ ServerAliveCountMax 15
 ServerAliveInterval 3
 ```
 
-SublimeText 2 preferences:
+Sublime Text 3 preferences:
 
 Arch:
 
 ```bash
 # stop sublimetext!
 
-cd ~/.config/sublime-text-2/Packages
+cd ~/.config/sublime-text-3/Packages
 mv User{,.orig}
 ln -s ~/dotfiles/sublime-text/User
 ```
@@ -42,7 +42,9 @@ OS X:
 ```bash
 # stop sublimetext!
 
-cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages
+cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages
 mv User{,.orig}
 ln -s ~/dotfiles/sublime-text/User
 ```
+
+Once everything is fine, `rm -rf User.orig`.
