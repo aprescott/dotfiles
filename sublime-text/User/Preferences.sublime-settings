@@ -6,7 +6,7 @@
 	"ignored_packages":
 	[
 		"Vintage",
-		"Markdown"
+		"Markdown" // prevent conflict with MarkdownEditing
 	],
 	"rulers":
 	[
