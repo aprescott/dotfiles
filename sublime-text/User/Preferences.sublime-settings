@@ -3,7 +3,7 @@
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"ensure_newline_at_eof_on_save": true,
 	"highlight_line": true,
-	"highlight_modified_tabs": false,
+	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
 		"Vintage",
