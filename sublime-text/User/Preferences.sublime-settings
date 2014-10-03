@@ -13,5 +13,6 @@
 	[
 		80
 	],
-	"show_encoding": true
+	"show_encoding": true,
+	"show_line_endings": true
 }
