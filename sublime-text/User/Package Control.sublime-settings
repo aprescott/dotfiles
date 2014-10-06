@@ -1,7 +1,7 @@
 {
 	"installed_packages":
 	[
-		"CoffeeScript",
+		"Better CoffeeScript",
 		"CSSFontFamily",
 		"Cucumber",
 		"Gherkin (Cucumber) Formatter",
