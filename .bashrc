@@ -11,7 +11,7 @@ if [ -d ~/etc ]; then
 fi
 
 export PATH=~/bin:$PATH
-export PATH=/opt/android-sdk/platform-tools/:/opt/android-sdk/tools/:$PATH
+export PATH=/opt/android-sdk/platform-tools:/opt/android-sdk/tools:$PATH
 export PATH=/opt/android-ndk:$PATH
 
 # don't put duplicate lines in the history. See bash(1) for more options
