@@ -7,6 +7,9 @@ find dotfiles -type f -maxdepth 1 |
   grep -v README.md |
   grep -v .gitignore |
   xargs -L 1 -I {} ln -f -s {}
+
+mkdir -p .vim
+cp -R dotfiles/.vim/{autoload,backups} .vim/
 ```
 
 Git config:
