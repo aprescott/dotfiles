@@ -7,5 +7,3 @@ alias battery_status="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 alias npm-exec='PATH=$(npm bin):$PATH'
 
 alias histoff="unset HISTFILE"
-alias wipeorigs='find . -name "*.orig" -print0 | xargs -0 rm'
-alias fuck='sudo $(history -p \!\!)'
