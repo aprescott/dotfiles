@@ -94,3 +94,5 @@ if $interactive_shell; then
 	    . /etc/bash_completion
 	fi
 fi # end interactive-specifics
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
