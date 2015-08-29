@@ -1,19 +1,23 @@
 {
 	"caret_style": "phase",
-	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"color_scheme": "Packages/Theme - Afterglow/Afterglow.tmTheme",
 	"enable_tab_scrolling": false,
 	"ensure_newline_at_eof_on_save": true,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Vintage",
-		"Markdown" // prevent conflict with MarkdownEditing
+		"Markdown",
+		"Vintage"
 	],
 	"rulers":
 	[
 		80
 	],
 	"show_encoding": true,
-	"show_line_endings": true
+	"show_line_endings": true,
+	"sidebar_size_12": true,
+	"status_bar_brighter": true,
+	"tabs_small": true,
+	"theme": "Afterglow.sublime-theme"
 }
