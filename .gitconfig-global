@@ -1,14 +1,15 @@
 #
-# This file should sit along-side ~/.gitconfig, and contains "global" configuration
-# settings that are universal across machines.
+# This file should sit along-side ~/.gitconfig, and contains "global"
+# configuration settings that are universal across machines.
 #
-# Place overriding settings in ~/.gitconfig, and ensure that you include this file:
+# Place overriding settings in ~/.gitconfig, and ensure that you include this
+# file:
 #
 # [include]
 #	path = ~/.gitconfig-global
 #
-# For convenience, this file provides a global-config alias to add configuration
-# settings to this file:
+# For convenience, this file provides a global-config alias to add
+# configuration settings to this file:
 #
 #   git global-config ARGS
 #
@@ -42,3 +43,9 @@
 	keepTemporaries = false
 [tag]
 	sort = version:refname
+[transfer]
+  fsckobjects = true
+[fetch]
+  fsckobjects = true
+[receive]
+  fsckObjects = true
