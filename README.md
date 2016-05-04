@@ -26,6 +26,7 @@ SSH starting config (until [`.ssh/config` supports config includes](https://bugz
 ```
 ServerAliveCountMax 15
 ServerAliveInterval 3
+UseRoaming No
 ```
 
 Sublime Text 3 preferences:
