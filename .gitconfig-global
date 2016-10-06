@@ -17,6 +17,8 @@
 [user]
 	name = Adam Prescott
 	email = adam@aprescott.com
+[diff]
+  compactionHeuristic = true
 [rebase]
 	autosquash = true
 [color]
