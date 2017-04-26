@@ -5,6 +5,7 @@
 	],
 	"installed_packages":
 	[
+		"A File Icon",
 		"All Autocomplete",
 		"Better CoffeeScript",
 		"CoffeeCompile",
@@ -17,11 +18,13 @@
 		"Github Tools",
 		"LoremIpsum",
 		"MarkdownEditing",
+		"Material Theme",
 		"Package Control",
 		"RSpec",
 		"Ruby Block Converter",
 		"SCSS",
 		"Theme - Afterglow",
+		"Tomorrow Color Schemes",
 		"TrailingSpaces",
 		"WordCount"
 	]
