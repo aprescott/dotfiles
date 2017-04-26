@@ -14,11 +14,13 @@
 #   git global-config ARGS
 #
 
+[core]
+	excludesfile = ~/.gitignore
 [user]
 	name = Adam Prescott
 	email = adam@aprescott.com
 [diff]
-  compactionHeuristic = true
+  indentHeuristic = true
 [rebase]
 	autosquash = true
 [color]
