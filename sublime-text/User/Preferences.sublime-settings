@@ -16,7 +16,6 @@
 	"ignored_packages":
 	[
 		"ElixirSublime",
-		"Markdown",
 		"Vintage"
 	],
 	"material_theme_accent_tomato": true,
