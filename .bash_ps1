@@ -17,4 +17,4 @@ if ! command -v __git_ps1 > /dev/null; then
     }
 fi
 
-PS1="\$(if [ \$? -gt 0 ]; then echo -e '$RED_BOLD\xe2\x9a\xa1 $reset_style'; fi)$prompt_style\w\$(__git_ps1 '$YELLOW_BOLD::%s')$prompt_style\$ $reset_style"
+PS1="$prompt_style\w\$(__git_ps1 '$YELLOW_BOLD::%s')$prompt_style\$(if [ \$? -gt 0 ]; then echo -e '$RED_BOLD'; fi)\$ $reset_style"
