@@ -1,0 +1,18 @@
+#!/bin/bash
+set -euo pipefail
+
+search="${1:-}"
+
+cat ~/.coauthors | grep -v '^#' | while read line; do
+  if [ -n "$search" ]; then
+    if ! grep -q -i -e "$search" <(echo "$line"); then
+      continue
+     fi
+  fi
+
+  key="$(echo "$line" | cut -d ',' -f 1)"
+  name="$(echo "$line" | cut -d ',' -f 2)"
+  email="$(echo "$line" | cut -d ',' -f 3)"
+
+  echo "Co-authored-by: $name <$email>"
+done

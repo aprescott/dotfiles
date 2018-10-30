@@ -14,6 +14,16 @@ mkdir -p .vim
 cp -R dotfiles/.vim/{autoload,backups} .vim/
 ```
 
+`bin/` files:
+
+```bash
+cd $HOME
+mkdir bin
+cd bin
+find ../dotfiles/bin -type f -maxdepth 1 |
+  xargs -L 1 -I {} ln -s {}
+```
+
 ### Git config
 
 `~/.gitconfig`:
@@ -78,3 +88,19 @@ Once everything is fine, `rm -rf User.orig`.
 ### MacOS Terminal.app profile
 
 Drag `_terminal_app_profile.terminal` into the Terminal.app's profile list.
+
+### `.coauthors`
+
+`bin/coauthors` reads from `~/.coauthors`, which uses a format of:
+
+```
+alice,Alice Foo,alice.foo@example.com
+bob,Bob Bar,bob.bar@example.com
+```
+
+Then:
+
+```bash
+$ coauthors alice
+Co-authored-by: Alice Foo <alice.foo@exampe.com>
+```
