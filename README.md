@@ -53,6 +53,16 @@ UseRoaming No
 
 Sublime Text 3 preferences:
 
+MacOS:
+
+```bash
+# stop sublimetext!
+
+cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages
+mv User{,.orig}
+ln -s ~/dotfiles/sublime-text/User
+```
+
 Arch:
 
 ```bash
@@ -63,14 +73,8 @@ mv User{,.orig}
 ln -s ~/dotfiles/sublime-text/User
 ```
 
-OS X:
-
-```bash
-# stop sublimetext!
-
-cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages
-mv User{,.orig}
-ln -s ~/dotfiles/sublime-text/User
-```
-
 Once everything is fine, `rm -rf User.orig`.
+
+### MacOS Terminal.app profile
+
+Drag `_terminal_app_profile.terminal` into the Terminal.app's profile list.
