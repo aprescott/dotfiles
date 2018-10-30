@@ -1,3 +1,5 @@
+## Initial setup
+
 Home dotfiles:
 
 ```bash
@@ -12,7 +14,9 @@ mkdir -p .vim
 cp -R dotfiles/.vim/{autoload,backups} .vim/
 ```
 
-Git config:
+### Git config
+
+`~/.gitconfig`:
 
 ```
 [include]
@@ -21,6 +25,22 @@ Git config:
 # Any other non-global, overriding settings below
 ```
 
+Useful conditional config:
+
+```
+[includeIf "gitdir:~/code/"]
+    path = ~/.gitconfig-work
+```
+
+Then, e.g., in `~/.gitconfig-work`:
+
+```
+[user]
+    email = you@work.example.com
+```
+
+### `~/.ssh/config`
+
 SSH starting config (until [`.ssh/config` supports config includes](https://bugzilla.mindrot.org/show_bug.cgi?id=1585))
 
 ```
@@ -28,6 +48,8 @@ ServerAliveCountMax 15
 ServerAliveInterval 3
 UseRoaming No
 ```
+
+### Sublime Text
 
 Sublime Text 3 preferences:
 
