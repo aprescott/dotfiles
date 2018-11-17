@@ -49,14 +49,12 @@ Then, e.g., in `~/.gitconfig-work`:
     email = you@work.example.com
 ```
 
-### `~/.ssh/config`
+### Global SSH Config
 
-SSH starting config (until [`.ssh/config` supports config includes](https://bugzilla.mindrot.org/show_bug.cgi?id=1585))
+At the top of `~/.ssh/config`:
 
 ```
-ServerAliveCountMax 15
-ServerAliveInterval 3
-UseRoaming No
+Include "~/.ssh-global-config"
 ```
 
 ### Sublime Text
