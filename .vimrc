@@ -108,6 +108,10 @@ set foldnestmax=0
 set nofoldenable
 set foldlevel=1
 
+" Prevent modelines as a security measure.
+set modelines=0
+set nomodeline
+
 set directory=.,~/vim/backups,~/tmp,/tmp
 set backupdir=~/.vim/backups,.,~/tmp,/tmp
 
