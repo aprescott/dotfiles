@@ -83,6 +83,24 @@ ln -s ~/dotfiles/sublime-text/User
 
 Once everything is fine, `rm -rf User.orig`.
 
+### VS Code
+
+```bash
+cd ~/Library/Application\ Support/Code/User
+mv settings.json{,.orig}
+ln -s ~/dotfiles/vs-code-user-settings.json settings.json
+```
+
+Once everything is fine, `rm -rf settings.json.orig`.
+
+Install extensions using the list in `vs-code-extensions`:
+
+```
+cat vs-code-extensions | xargs -n 1 -I {} code --install-extension {}
+```
+
+Snapshot extensions with `code --list-extensions --show-versions > ~/dotfiles/vs-code-extensions`.
+
 ### MacOS Terminal.app profile
 
 Drag `_terminal_app_profile.terminal` into the Terminal.app's profile list.

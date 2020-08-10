@@ -1,0 +1,11 @@
+{
+    "telemetry.enableTelemetry": false,
+    "workbench.colorTheme": "Tomorrow Night",
+    "editor.cursorBlinking": "phase",
+    "editor.cursorStyle": "line-thin",
+    "files.autoSave": "onFocusChange",
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.settings.openDefaultSettings": true,
+    "workbench.settings.useSplitJSON": true,
+    "workbench.activityBar.visible": false
+}
