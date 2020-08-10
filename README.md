@@ -89,6 +89,7 @@ Once everything is fine, `rm -rf User.orig`.
 cd ~/Library/Application\ Support/Code/User
 mv settings.json{,.orig}
 ln -s ~/dotfiles/vs-code-user-settings.json settings.json
+ln -s ~/dotfiles/vs-code-user-keybindings.json keybindings.json
 ```
 
 Once everything is fine, `rm -rf settings.json.orig`.

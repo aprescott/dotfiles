@@ -7,5 +7,16 @@
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.settings.openDefaultSettings": true,
     "workbench.settings.useSplitJSON": true,
-    "workbench.activityBar.visible": false
+    "workbench.activityBar.visible": false,
+    "window.zoomLevel": 0,
+    "files.trimTrailingWhitespace": true,
+    "editor.scrollBeyondLastLine": false,
+    "workbench.startupEditor": "newUntitledFile",
+    "[ruby]": {
+        "editor.tabSize": 2
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "trailing-spaces.highlightCurrentLine": false,
+    "files.trimFinalNewlines": true,
+    "files.insertFinalNewline": true
 }
