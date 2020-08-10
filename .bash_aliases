@@ -14,3 +14,7 @@ alias fundle='bundle check || bundle install --jobs=10 --local'
 
 alias gro="git fetch && git rebase -i origin/master"
 alias gpu="git push -u origin HEAD"
+
+function untilfail() {
+  while "$@"; do :; done
+}
