@@ -7,7 +7,6 @@
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.settings.openDefaultSettings": true,
     "workbench.settings.useSplitJSON": true,
-    "workbench.activityBar.visible": false,
     "window.zoomLevel": 0,
     "files.trimTrailingWhitespace": true,
     "editor.scrollBeyondLastLine": false,
@@ -18,5 +17,31 @@
     "diffEditor.ignoreTrimWhitespace": false,
     "trailing-spaces.highlightCurrentLine": false,
     "files.trimFinalNewlines": true,
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "window.newWindowDimensions": "maximized",
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.codeLens.scopes": [
+        "document",
+        "containers"
+    ],
+    "gitlens.codeLens.enabled": false,
+    "gitlens.hovers.avatars": false,
+    "gitlens.views.repositories.location": "gitlens",
+    "gitlens.views.fileHistory.location": "gitlens",
+    "gitlens.views.lineHistory.location": "gitlens",
+    "gitlens.views.compare.location": "gitlens",
+    "gitlens.views.search.location": "gitlens",
+    "gitlens.hovers.enabled": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "ruby.useLanguageServer": true,
+    "workbench.activityBar.visible": true,
+    "search.searchEditor.defaultNumberOfContextLines": 2,
+    "search.showLineNumbers": true,
+    "workbench.editor.tabSizing": "shrink",
+    "search.searchEditor.reusePriorSearchConfiguration": true,
+    "editor.rulers": [
+        80,
+        120
+    ]
 }

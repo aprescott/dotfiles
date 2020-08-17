@@ -12,5 +12,13 @@
     {
         "key": "cmd+t",
         "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "shift+cmd+f",
+        "command": "-workbench.action.findInFiles"
+    },
+    {
+        "key": "shift+cmd+f",
+        "command": "search.action.openNewEditor"
     }
 ]
