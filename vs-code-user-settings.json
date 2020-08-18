@@ -43,5 +43,11 @@
     "editor.rulers": [
         80,
         120
-    ]
+    ],
+    "workbench.colorCustomizations": {
+        "statusBar.background" : "#222222",
+        "statusBar.foreground": "#b1b1b1",
+        "statusBar.noFolderBackground" : "#222222",
+        "statusBar.debuggingBackground": "#511f1f"
+    }
 }
