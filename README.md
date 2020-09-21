@@ -62,7 +62,7 @@ Include "~/.ssh-global-config"
 
 Sublime Text 3 preferences:
 
-MacOS:
+macOS:
 
 ```bash
 # stop sublimetext!
@@ -103,11 +103,19 @@ cat vs-code-extensions | xargs -n 1 -I {} code --install-extension {}
 
 Snapshot extensions with `code --list-extensions --show-versions > ~/dotfiles/vs-code-extensions`.
 
-### MacOS Terminal.app profile
+### macOS Terminal.app profile
 
 Drag `_terminal_app_profile.terminal` into the Terminal.app's profile list. (Set it as default in the profile list.)
 
-Change the default shell with `chsh -s /bin/bash`.
+Upgrade bash:
+
+```bash
+brew install bash
+# confirm which -a bash shows /usr/local/bin/bash above /bin/bash
+sudo vim /etc/shells # add /usr/local/bin/bash
+chsh -s /usr/local/bin/bash
+# echo "$BASH_VERSION" to confirm
+```
 
 ### `.coauthors`
 
