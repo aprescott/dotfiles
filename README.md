@@ -6,6 +6,7 @@ Home dotfiles:
 cd $HOME
 find dotfiles -type f -maxdepth 1 |
   grep -v '^dotfiles/_' |
+  grep -v '^dotfiles/vs-code-' |
   grep -v README.md |
   grep -v .gitignore |
   xargs -L 1 -I {} ln -f -s {}
