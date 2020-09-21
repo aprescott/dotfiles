@@ -116,3 +116,8 @@ set directory=.,~/vim/backups,~/tmp,/tmp
 set backupdir=~/.vim/backups,.,~/tmp,/tmp
 
 call pathogen#infect()
+
+" Force the light background syntax color scheme
+" even when we're on a dark scheme (since it's more
+" muted).
+set background=light
