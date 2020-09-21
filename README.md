@@ -104,7 +104,9 @@ Snapshot extensions with `code --list-extensions --show-versions > ~/dotfiles/vs
 
 ### MacOS Terminal.app profile
 
-Drag `_terminal_app_profile.terminal` into the Terminal.app's profile list.
+Drag `_terminal_app_profile.terminal` into the Terminal.app's profile list. (Set it as default in the profile list.)
+
+Change the default shell with `chsh -s /bin/bash`.
 
 ### `.coauthors`
 
