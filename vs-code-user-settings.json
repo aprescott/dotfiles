@@ -14,6 +14,9 @@
     "[ruby]": {
         "editor.tabSize": 2
     },
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
     "diffEditor.ignoreTrimWhitespace": false,
     "trailing-spaces.highlightCurrentLine": false,
     "files.trimFinalNewlines": true,
@@ -49,5 +52,6 @@
         "statusBar.foreground": "#b1b1b1",
         "statusBar.noFolderBackground" : "#222222",
         "statusBar.debuggingBackground": "#511f1f"
-    }
+    },
+    "search.maintainFileSearchCache": true
 }
