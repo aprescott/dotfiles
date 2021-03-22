@@ -50,5 +50,17 @@
         "key": "shift+cmd+l",
         "command": "-selectAllSearchEditorMatches",
         "when": "inSearchEditor"
+    },
+    {
+        "key": "ctrl+shift+[",
+        "command": "extension.rubyBlockToggle"
+    },
+    {
+        "key": "ctrl+shift+]",
+        "command": "extension.rubyBlockToggle"
+    },
+    {
+        "key": "ctrl+cmd+b",
+        "command": "-extension.rubyBlockToggle"
     }
 ]

@@ -7,7 +7,6 @@
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.settings.openDefaultSettings": true,
     "workbench.settings.useSplitJSON": true,
-    "window.zoomLevel": 0,
     "files.trimTrailingWhitespace": true,
     "editor.scrollBeyondLastLine": false,
     "workbench.startupEditor": "newUntitledFile",
@@ -53,5 +52,9 @@
         "statusBar.noFolderBackground" : "#222222",
         "statusBar.debuggingBackground": "#511f1f"
     },
-    "search.maintainFileSearchCache": true
+    "search.maintainFileSearchCache": true,
+    "editor.columnSelection": false,
+    "window.zoomLevel": 0,
+    "workbench.editor.decorations.badges": true,
+    "workbench.editor.decorations.colors": true,
 }
