@@ -103,6 +103,18 @@ cat vs-code-extensions | xargs -n 1 -I {} code --install-extension {}
 
 Snapshot extensions with `code --list-extensions --show-versions > ~/dotfiles/vs-code-extensions`.
 
+### Homebrew
+
+After installation, Homebrew will prompt you to add its own setup `eval` line to `~/.bash_profile`.
+
+Add it instead to `~/etc`:
+
+```bash
+mkdir ~/etc
+touch ~/etc/homebrew.sh
+# add the eval line to `~/etc/homebrew.sh`
+```
+
 ### macOS Terminal.app profile
 
 Drag `_terminal_app_profile.terminal` into the Terminal.app's profile list. (Set it as default in the profile list.)
