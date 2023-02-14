@@ -115,6 +115,8 @@ touch ~/etc/homebrew.sh
 # add the eval line to `~/etc/homebrew.sh`
 ```
 
+On macOS, `brew install git` to make sure you're not on Apple's built-in `git`.
+
 ### macOS Terminal.app profile
 
 Drag `_terminal_app_profile.terminal` into the Terminal.app's profile list. (Set it as default in the profile list.)
