@@ -36,6 +36,9 @@ files_to_source=(
 	# arch uses /usr/share for this, which is helpful
 	/usr/{,local/}share/chruby/chruby.sh
 	/usr/{,local/}share/chruby/auto.sh
+	# Latest Apple hardware uses /opt
+	/opt/homebrew/opt/chruby/share/chruby/chruby.sh
+	/opt/homebrew/opt/chruby/share/chruby/auto.sh
 	/usr/local/etc/bash_completion.d/git-prompt.sh
 	/usr/local/etc/bash_completion.d/git-completion.bash
 	/usr/share/git/completion/git-completion.bash
