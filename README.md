@@ -111,9 +111,9 @@ Upgrade bash:
 
 ```bash
 brew install bash
-# confirm which -a bash shows /usr/local/bin/bash above /bin/bash
-sudo vim /etc/shells # add /usr/local/bin/bash
-chsh -s /usr/local/bin/bash
+# confirm `which -a bash` shows /opt/homebrew/bin/bash above /bin/bash
+sudo vim /etc/shells # add /opt/homebrew/bin/bash
+chsh -s /opt/homebrew/bin/bash
 # echo "$BASH_VERSION" to confirm
 ```
 
