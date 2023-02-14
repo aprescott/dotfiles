@@ -43,6 +43,9 @@ files_to_source=(
 	/usr/local/etc/bash_completion.d/git-completion.bash
 	/usr/share/git/completion/git-completion.bash
 	/usr/share/git/completion/git-prompt.sh
+	# Apple again.
+	/opt/homebrew/etc/bash_completion.d/git-completion.bash
+	/opt/homebrew/etc/bash_completion.d/git-prompt.sh
 )
 
 for f in "${files_to_source[@]}"; do
