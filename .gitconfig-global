@@ -16,6 +16,7 @@
 
 [core]
 	excludesfile = ~/.gitignore
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [user]
 	name = Adam Prescott
 	email = adam@aprescott.com
@@ -49,3 +50,23 @@
 	sort = version:refname
 [commit]
 	verbose = true
+[color "diff-highlight"]
+	oldNormal = red
+	oldHighlight = 16 bold red
+	newNormal = green
+	newHighlight = 10 22
+[color "diff"]
+	meta = yellow
+	frag = magenta
+	func = 146
+	commit = yellow
+	old = red
+	new = green
+	whitespace = red reverse
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[diff-so-fancy]
+	stripLeadingSymbols = false # +/- markers
+	markEmptyLines = false
+	changeHunkIndicators = true
+	rulerWidth = 47 # default git header width
