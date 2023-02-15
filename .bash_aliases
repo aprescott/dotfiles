@@ -1,4 +1,4 @@
-alias ls='ls -1 -h'
+alias ls='ls -la -h'
 alias histoff="unset HISTFILE"
 
 alias npm-exec='PATH=$(npm bin):$PATH'
