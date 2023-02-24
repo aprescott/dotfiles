@@ -1,18 +1,15 @@
 {
     "telemetry.enableTelemetry": false,
-    "workbench.colorTheme": "Tomorrow Night",
     "editor.cursorBlinking": "phase",
     "editor.cursorStyle": "line-thin",
     "files.autoSave": "onFocusChange",
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.settings.openDefaultSettings": true,
     "workbench.settings.useSplitJSON": true,
+    "workbench.settings.openDefaultKeybindings": true,
     "files.trimTrailingWhitespace": true,
     "editor.scrollBeyondLastLine": false,
     "workbench.startupEditor": "newUntitledFile",
-    "[ruby]": {
-        "editor.tabSize": 2
-    },
     "[javascript]": {
         "editor.tabSize": 2
     },
@@ -36,7 +33,6 @@
     "gitlens.views.search.location": "gitlens",
     "gitlens.hovers.enabled": false,
     "workbench.editor.enablePreviewFromQuickOpen": false,
-    "ruby.useLanguageServer": true,
     "workbench.activityBar.visible": true,
     "search.searchEditor.defaultNumberOfContextLines": 2,
     "search.showLineNumbers": true,
@@ -46,15 +42,38 @@
         80,
         120
     ],
-    "workbench.colorCustomizations": {
-        "statusBar.background" : "#222222",
-        "statusBar.foreground": "#b1b1b1",
-        "statusBar.noFolderBackground" : "#222222",
-        "statusBar.debuggingBackground": "#511f1f"
-    },
+    // Only needed for default-y color themes.
+    // Custom ones tend to set more appropriate values.
+    // "workbench.colorCustomizations": {
+    //     "statusBar.background" : "#222222",
+    //     "statusBar.foreground": "#b1b1b1",
+    //     "statusBar.noFolderBackground" : "#222222",
+    //     "statusBar.debuggingBackground": "#511f1f"
+    // },
     "search.maintainFileSearchCache": true,
     "editor.columnSelection": false,
     "window.zoomLevel": 0,
     "workbench.editor.decorations.badges": true,
     "workbench.editor.decorations.colors": true,
+    "catppuccin.italicKeywords": false,
+    "catppuccin.italicComments": false,
+    "catppuccin.accentColor": "rosewater",
+    "catppuccin.workbenchMode": "flat",
+    "workbench.colorTheme": "GitHub Dark Default",
+    "byesig.opacity": 0.5,
+    "byesig.showIcon": false,
+    "byesig.fold": false,
+    "[ruby]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true,
+    },
+    "ruby.lint": {
+        "rubocop": true
+    },
+    "ruby.format": "rubocop",
+    "ruby.useLanguageServer": true,
+    "solargraph.hover": false,
+    // ruby extension handles formatting
+    "solargraph.autoformat": false,
+    "solargraph.formatting": false,
 }
