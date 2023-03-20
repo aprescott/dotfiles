@@ -68,7 +68,9 @@
         "editor.formatOnSave": true,
     },
     "ruby.lint": {
-        "rubocop": true
+        "rubocop": {
+            "forceExclusion": true
+        },
     },
     "ruby.format": "rubocop",
     "ruby.useLanguageServer": true,
