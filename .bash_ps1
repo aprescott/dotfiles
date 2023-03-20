@@ -1,13 +1,52 @@
+# Prompt variable:
+OLD_PS1="$PS1"
+
+# Arbitrary RGB (decimal): "\[\033[38;2;R;G;Bm\]"
+# Not supported everywhere.
+function ps1_rgb() {
+  # Check if all arguments are provided
+  if [ "$#" -ne 3 ]; then
+    echo "Error: Function ps1_rgb_code() requires three arguments (R, G, B)"
+    return 1
+  fi
+
+  # Check if arguments are integers between 0 and 255
+  for i in "$@"; do
+    if ! [[ "$i" =~ ^[0-9]+$ ]]; then
+      echo "Error: All arguments must be integers between 0 and 255"
+      return 1
+    elif [ "$i" -lt 0 ] || [ "$i" -gt 255 ]; then
+      echo "Error: All arguments must be integers between 0 and 255"
+      return 1
+    fi
+  done
+
+  local R="$1"
+  local G="$2"
+  local B="$3"
+  local escape_sequence="\[\033[38;2;${R};${G};${B}m\]"
+
+  echo "${escape_sequence}"
+}
+
+RESET_STYLE="\[\033[00m\]"
+BOLD_ON="\[\033[1m\]"
+FAINT_ON="\[\033[3m\]" # maps to italics
+
 YELLOW="\[\033[0;33m\]"
 YELLOW_BOLD="\[\033[1;33m\]"
 RED_BOLD="\[\033[1;31m\]"
+LIGHT_ORANGE="\[\033[38;5;215m\]"
+DARK_ORANGE="\[\033[38;5;130m\]"
+CUSTOM_ORANGE="$(ps1_rgb 220 165 50)"
 
-reset_style='\[\033[00m\]'
-prompt_style=$reset_style'\[\033[0;90m\]'
-command_style=$reset_style'\[\033[1;29m\]'
+# 90 = "bright black" / "dark gray"
+PROMPT_STYLE="${RESET_STYLE}\[\033[0;90m\]"
+command_style="${RESET_STYLE}"
+ERROR_STYLE="$RED_BOLD"
 
-# Prompt variable:
-OLD_PS1="$PS1"
+PS1_GIT_BRANCH_COLOR_PART_1="${LIGHT_ORANGE}"
+PS1_GIT_BRANCH_COLOR_PART_2="${BOLD_ON}${LIGHT_ORANGE}"
 
 # we might not have git completion available, so squealch the missing
 # command error.
@@ -17,4 +56,30 @@ if ! command -v __git_ps1 > /dev/null; then
     }
 fi
 
-PS1="$prompt_style\w\$(__git_ps1 '$YELLOW_BOLD::%s')$prompt_style\$(if [ \$? -gt 0 ]; then echo -e '$RED_BOLD'; fi)\$ $reset_style"
+function ps1_git_branch_part() {
+  local branch=$(__git_ps1 '%s')
+
+  if [ -z "$branch" ]; then
+    echo -n # nothing
+  elif [[ $branch =~ ([^/]+/)(.*) ]]; then
+    # separator included this way so that it's never made bold
+    if [ "$1" -eq "1" ]; then echo -n "::"; fi
+
+    echo "${BASH_REMATCH[$1]}"
+  else
+    # separator included this way so that it's never made bold
+    if [ "$1" -eq "1" ]; then echo -n "::"; fi
+
+    # bundle everything into the 2nd part, leaving earlier parts blank
+    if [ "$1" -eq "2" ]; then echo -e "$branch"; fi
+  fi
+}
+
+function stash_return_value() {
+  RETURN_VALUE=$?
+}
+
+PROMPT_COMMAND=stash_return_value
+PS1="${PROMPT_STYLE}\w"
+PS1="${PS1}${PS1_GIT_BRANCH_COLOR_PART_1}\$(ps1_git_branch_part 1)${PS1_GIT_BRANCH_COLOR_PART_2}\$(ps1_git_branch_part 2)"
+PS1="${PS1}${PROMPT_STYLE}\$(if [ \$RETURN_VALUE -gt 0 ]; then echo -e '$ERROR_STYLE'; fi)\$ $RESET_STYLE"
