@@ -12,9 +12,11 @@ function push-each-commit {
 
 alias fundle='bundle check || bundle install --jobs=10 --local'
 
-alias gro="git fetch && git rebase -i origin/master"
+alias gro="git log -1 && git fetch && git rebase -i origin/main"
 alias gpu="git push -u origin HEAD"
 
 function untilfail() {
   while "$@"; do :; done
 }
+
+alias mrc="git log -1 --format=fuller"
