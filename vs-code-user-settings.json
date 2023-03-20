@@ -78,4 +78,9 @@
     // ruby extension handles formatting
     "solargraph.autoformat": false,
     "solargraph.formatting": false,
+    "editor.guides.bracketPairs": true,
+    "[scss]": {
+        "editor.tabSize": 2
+    },
+    "editor.minimap.showSlider": "always",
 }
