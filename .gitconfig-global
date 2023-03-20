@@ -32,6 +32,7 @@
 	delete-merged-branches = !git branch --merged | grep -v '^\\*' | grep -v '\\bmaster\\b' | grep -v '\\bmain\\b' | sed -e 's/^ *//g' | tr '\\n' '\\0' | xargs -0 git branch -d
 	redo-commit = "!git log -1 && git commit --amend --reset-author -C HEAD"
 	reword-commit = "!git log -1 && git commit --amend --reset-author"
+	back = "!git switch main && git pull && git remote prune origin && git delete-merged-branches"
 	global-config = "!git config --file ~/.gitconfig-global"
 [help]
 	autocorrect = 1
