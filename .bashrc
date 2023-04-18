@@ -15,7 +15,6 @@ fi
 export PATH=~/bin:$PATH
 export PATH=/opt/android-sdk/platform-tools:/opt/android-sdk/tools:$PATH
 export PATH=/opt/android-ndk:$PATH
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
