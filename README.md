@@ -58,32 +58,6 @@ At the top of `~/.ssh/config`:
 Include "~/.ssh-global-config"
 ```
 
-### Sublime Text
-
-Sublime Text 3 preferences:
-
-macOS:
-
-```bash
-# stop sublimetext!
-
-cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages
-mv User{,.orig}
-ln -s ~/dotfiles/sublime-text/User
-```
-
-Arch:
-
-```bash
-# stop sublimetext!
-
-cd ~/.config/sublime-text-3/Packages
-mv User{,.orig}
-ln -s ~/dotfiles/sublime-text/User
-```
-
-Once everything is fine, `rm -rf User.orig`.
-
 ### VS Code
 
 ```bash

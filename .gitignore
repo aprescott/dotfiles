@@ -2,8 +2,3 @@
 
 /.vim/backups/*
 /.vim/.netrwhist
-
-/sublime-text/User/Package Control.cache
-/sublime-text/User/Package Control.last-run
-/sublime-text/User/Package Control.*-ca-bundle
-/sublime-text/User/oscrypto-ca-bundle.crt
