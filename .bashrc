@@ -52,9 +52,15 @@ for f in "${files_to_source[@]}"; do
 	fi
 done
 
-DEFAULT_RUBY="ruby-3.2.0"
 if command -v chruby > /dev/null; then
-  chruby "$DEFAULT_RUBY"
+	DEFAULT_RUBY="ruby-3.2.0"
+	PWD_RUBY_VERSION="$(cat .ruby-version 2>/dev/null)"
+
+	# If .ruby-version exists in pwd, use that, otherwise use $DEFAULT_RUBY.
+	# Useful for, e.g., VS Code terminal initialization
+	CHOSEN_RUBY=${PWD_RUBY_VERSION:-$DEFAULT_RUBY}
+
+	chruby "$CHOSEN_RUBY"
 fi
 
 # Get npm to put stuff into ~ as "global"

@@ -65,13 +65,14 @@ cd ~/Library/Application\ Support/Code/User
 mv settings.json{,.orig}
 ln -s ~/dotfiles/vs-code-user-settings.json settings.json
 ln -s ~/dotfiles/vs-code-user-keybindings.json keybindings.json
+ln -s ~/dotfiles/vs-code-user-tasks.json tasks.json
 ```
 
-Once everything is fine, `rm -rf settings.json.orig`.
+Once everything is fine, `rm` the `.orig` files.
 
 Install extensions using the list in `vs-code-extensions`:
 
-```
+```bash
 cat vs-code-extensions | xargs -n 1 -I {} code --install-extension {}
 ```
 

@@ -1,4 +1,4 @@
-// Place your key bindings in this file to override the defaultsauto[]
+// Place your key bindings in this file to override the defaults
 [
     {
         "key": "shift+cmd+r",
@@ -63,5 +63,48 @@
     {
         "key": "cmd+\\",
         "command": "-workbench.action.splitEditor"
+    },
+    {
+        "key": "shift+cmd+c",
+        "command": "-workbench.action.terminal.openNativeConsole",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "shift+cmd+t",
+        "command": "-extension.goToSpec",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+cmd+,",
+        "command": "-editor.action.inPlaceReplace.up",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+cmd+,",
+        "command": "extension.goToSpec",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+cmd+/",
+        "command": "workbench.panel.chatSidebar.copilot"
+    },
+    {
+        "key": "ctrl+cmd+i",
+        "command": "-workbench.panel.chatSidebar.copilot"
+    },
+    {
+        "key": "cmd+shift+.",
+        "command": "workbench.action.tasks.runTask",
+        "args": "(rspec) run all tests"
+    },
+    {
+        "key": "cmd+shift+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "(rspec) run current file"
+    },
+    {
+        "key": "cmd+shift+m",
+        "command": "workbench.action.tasks.runTask",
+        "args": "(rspec) run current test"
     }
 ]
