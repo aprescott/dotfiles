@@ -86,11 +86,13 @@
     },
     {
         "key": "shift+cmd+/",
-        "command": "workbench.panel.chatSidebar.copilot"
+        "command": "workbench.action.chat.open",
+        "when": "hasChatProvider"
     },
     {
         "key": "ctrl+cmd+i",
-        "command": "-workbench.panel.chatSidebar.copilot"
+        "command": "-workbench.action.chat.open",
+        "when": "hasChatProvider"
     },
     {
         "key": "cmd+shift+.",
@@ -106,5 +108,11 @@
         "key": "cmd+shift+m",
         "command": "workbench.action.tasks.runTask",
         "args": "(rspec) run current test"
+    },
+    {
+
+        "key": "alt+shift+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "(rspec) run changed tests"
     }
 ]

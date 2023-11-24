@@ -11,7 +11,7 @@
     "editor.scrollBeyondLastLine": false,
     "workbench.startupEditor": "newUntitledFile",
     "[javascript]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
     },
     "diffEditor.ignoreTrimWhitespace": false,
     "trailing-spaces.highlightCurrentLine": false,
@@ -67,6 +67,7 @@
     // ruby extension handles formatting
     "solargraph.autoformat": false,
     "solargraph.formatting": false,
+    "rubyLsp.formatter": "auto",
     "editor.guides.bracketPairs": true,
     "[scss]": {
         "editor.tabSize": 2
@@ -75,9 +76,32 @@
     "solargraph.references": false,
     // for Copilot
     "editor.inlineSuggest.enabled": true,
-    "chat.experimental.defaultMode": "both",
     // much more pleasant rapid x'ing
     "workbench.editor.tabSizing": "fixed",
-    "workbench.colorTheme": "GitHub Dark Default",
     "terminal.integrated.inheritEnv": false,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+    "editor.stickyScroll.enabled": true,
+    "accessibility.dimUnfocused.enabled": true,
+    "accessibility.dimUnfocused.opacity": 0.8,
+    "workbench.editor.pinnedTabsOnSeparateRow": true,
+    "workbench.activityBar.location": "top",
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "[erb]": {
+        "editor.tabSize": 2
+    },
+    "tailwind-fold.autoFold": false,
+    "workbench.colorTheme": "GitHub Dark Default",
+    "rubyLsp.enabledFeatures": {
+        "inlayHint": false,
+    },
+    // "editor.fontLigatures": "'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08'",
+    // "editor.fontFamily": "'Monaspace Neon Var', Menlo, Monaco, 'Courier New', monospace",
+    // "editor.fontVariations": "'wght' 300",
 }
