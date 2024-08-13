@@ -119,3 +119,6 @@ if $interactive_shell; then
 fi # end interactive-specifics
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export FX_THEME=3
+. "$HOME/.cargo/env"
