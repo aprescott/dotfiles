@@ -79,7 +79,7 @@ function stash_return_value() {
   RETURN_VALUE=$?
 }
 
-PROMPT_COMMAND=stash_return_value
+PROMPT_COMMAND="stash_return_value; $PROMPT_COMMAND"
 PS1="${PROMPT_STYLE}\w"
 PS1="${PS1}${PS1_GIT_BRANCH_COLOR_PART_1}\$(ps1_git_branch_part 1)${PS1_GIT_BRANCH_COLOR_PART_2}\$(ps1_git_branch_part 2)"
 PS1="${PS1}${PROMPT_STYLE}\$(if [ \$RETURN_VALUE -gt 0 ]; then echo -e '$ERROR_STYLE'; fi)\$ $RESET_STYLE"

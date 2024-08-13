@@ -25,6 +25,15 @@ find ../dotfiles/bin -type f -maxdepth 1 |
   xargs -L 1 -I {} ln -s {}
 ```
 
+kitty terminal config:
+
+```shell
+cd $HOME
+cd .config/kitty
+find ../../dotfiles/kitty -type f -maxdepth 1 |
+  xargs -L 1 -I {} ln -f -s {}
+```
+
 ### Git config
 
 `~/.gitconfig`:

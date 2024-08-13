@@ -27,6 +27,15 @@ shopt -s histappend
 HISTSIZE=10000
 HISTFILESIZE=10000
 
+# The value that would be set for `shell_integration` in `kitty.conf`.
+# Specified here because manual integration is in use so we can preserve
+# control over PROMPT_COMMAND.
+kitty_shell_integration_config_value="no-cursor"
+if test -n "$KITTY_INSTALLATION_DIR"; then
+    export KITTY_SHELL_INTEGRATION="$kitty_shell_integration_config_value"
+    source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"
+fi
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
