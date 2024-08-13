@@ -18,8 +18,8 @@
 	excludesfile = ~/.gitignore
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [user]
-	name = Adam Prescott
-	email = adam@aprescott.com
+	name = aprescott
+	email = ash@aprescott.com
 [diff]
   indentHeuristic = true
 [rebase]
@@ -30,8 +30,8 @@
 	st = status
 	log-graph = log --graph --oneline --decorate --all
 	delete-merged-branches = !git branch --merged | grep -v '^\\*' | grep -v '\\bmaster\\b' | grep -v '\\bmain\\b' | sed -e 's/^ *//g' | tr '\\n' '\\0' | xargs -0 git branch -d
-	redo-commit = "!git log -1 && git commit --amend --reset-author -C HEAD"
-	reword-commit = "!git log -1 && git commit --amend --reset-author"
+	redo-commit = "!__redo_commit_f() { CURRENT_AUTHOR=$(git log -1 --format=\"%ae\"); RESET_AUTHOR_OPTION=\"\"; if [ \"$CURRENT_AUTHOR\" = \"$(git config user.email)\" ]; then RESET_AUTHOR_OPTION=\"--reset-author\"; fi; git --no-pager log -1 && git commit --amend $RESET_AUTHOR_OPTION -C HEAD; }; __redo_commit_f; unset __redo_commit_f"
+	reword-commit = "!__redo_commit_f() { CURRENT_AUTHOR=$(git log -1 --format=\"%ae\"); RESET_AUTHOR_OPTION=\"\"; if [ \"$CURRENT_AUTHOR\" = \"$(git config user.email)\" ]; then RESET_AUTHOR_OPTION=\"--reset-author\"; fi; git --no-pager log -1 && git commit --amend $RESET_AUTHOR_OPTION; }; __redo_commit_f; unset __redo_commit_f"
 	back = "!git switch main && git pull && git remote prune origin && git delete-merged-branches"
 	global-config = "!git config --file ~/.gitconfig-global"
 [help]
@@ -41,8 +41,9 @@
 	autoSetupRemote = true
 [merge]
 	tool = vscode
-	keepBackup = false
+[mergetool]
 	keepTemporaries = false
+	keepBackup = false
 [mergetool "vscode"]
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 	trustExitCode = false

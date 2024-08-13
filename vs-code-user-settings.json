@@ -61,7 +61,7 @@
     "byesig.fold": false,
     "[ruby]": {
         "editor.tabSize": 2,
-        "editor.formatOnSave": false,
+        "editor.formatOnSave": false
     },
     "solargraph.hover": false,
     // ruby extension handles formatting
@@ -87,7 +87,7 @@
     },
     "editor.stickyScroll.enabled": true,
     "accessibility.dimUnfocused.enabled": true,
-    "accessibility.dimUnfocused.opacity": 0.8,
+    "accessibility.dimUnfocused.opacity": 0.9,
     "workbench.editor.pinnedTabsOnSeparateRow": true,
     "workbench.activityBar.location": "top",
     "[html]": {
@@ -96,12 +96,24 @@
     "[erb]": {
         "editor.tabSize": 2
     },
+    "[css]": {
+        "editor.tabSize": 2
+    },
     "tailwind-fold.autoFold": false,
     "workbench.colorTheme": "GitHub Dark Default",
     "rubyLsp.enabledFeatures": {
         "inlayHint": false,
     },
+    "rubyLsp.featuresConfiguration": {
+        "codeLens": {
+            "gemfileLinks": false
+        }
+    },
     // "editor.fontLigatures": "'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08'",
     // "editor.fontFamily": "'Monaspace Neon Var', Menlo, Monaco, 'Courier New', monospace",
     // "editor.fontVariations": "'wght' 300",
+    "workbench.tree.enableStickyScroll": true,
+    "editor.inlineSuggest.fontFamily": "Monaspace Neon Var",
+    "security.workspace.trust.banner": "never",
+    "github.copilot.editor.enableAutoCompletions": true
 }
