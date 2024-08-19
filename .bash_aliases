@@ -13,6 +13,7 @@ function push-each-commit {
 alias fundle='bundle check || bundle install --jobs=10 --local'
 
 alias gro="git --no-pager log -1 && git fetch && git rebase -i origin/main"
+alias grb='git --no-pager log -1 && git fetch && git rebase -i $(git merge-base origin/main HEAD)'
 alias gpu="git push -u origin HEAD"
 
 function untilfail() {
