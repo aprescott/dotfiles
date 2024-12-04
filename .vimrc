@@ -63,10 +63,9 @@ if has("autocmd")
   augroup END
 
 else
-
-  set autoindent		" always set autoindenting on
-
 endif " has("autocmd")
+
+set autoindent		" always set autoindenting on
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.

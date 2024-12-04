@@ -89,7 +89,6 @@
     "accessibility.dimUnfocused.enabled": true,
     "accessibility.dimUnfocused.opacity": 0.9,
     "workbench.editor.pinnedTabsOnSeparateRow": true,
-    "workbench.activityBar.location": "top",
     "[html]": {
         "editor.tabSize": 2
     },
@@ -115,5 +114,9 @@
     "workbench.tree.enableStickyScroll": true,
     "editor.inlineSuggest.fontFamily": "Monaspace Neon Var",
     "security.workspace.trust.banner": "never",
-    "github.copilot.editor.enableAutoCompletions": true
+    "github.copilot.editor.enableAutoCompletions": true,
+    "workbench.activityBar.location": "top",
+    "rubyLsp.featureFlags": {
+        "launcher": false
+    }
 }
