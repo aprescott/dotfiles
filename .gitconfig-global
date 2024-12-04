@@ -34,6 +34,9 @@
 	reword-commit = "!__redo_commit_f() { CURRENT_AUTHOR=$(git log -1 --format=\"%ae\"); RESET_AUTHOR_OPTION=\"\"; if [ \"$CURRENT_AUTHOR\" = \"$(git config user.email)\" ]; then RESET_AUTHOR_OPTION=\"--reset-author\"; fi; git --no-pager log -1 && git commit --amend $RESET_AUTHOR_OPTION; }; __redo_commit_f; unset __redo_commit_f"
 	back = "!git switch main && git pull && git remote prune origin && git delete-merged-branches"
 	global-config = "!git config --file ~/.gitconfig-global"
+	wip = "commit -m wip"
+	wipwip = "!git add . && git commit -m wip"
+	# new = "!newbranchfunc() { name="$*"; git switch -c aprescott/\"${name// /-}\"; }; newbranchfunc"
 [help]
 	autocorrect = 1
 [push]
