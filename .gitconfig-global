@@ -21,7 +21,7 @@
 	name = aprescott
 	email = ash@aprescott.com
 [diff]
-  indentHeuristic = true
+	indentHeuristic = true
 [rebase]
 	autosquash = true
 [color]
