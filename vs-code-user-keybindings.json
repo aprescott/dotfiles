@@ -3,114 +3,260 @@
     {
         "key": "shift+cmd+r",
         "command": "workbench.action.showAllSymbols",
-        "when": "!inSearchEditor"
+        "when": "isMac && !inSearchEditor"
     },
     {
         "key": "cmd+t",
-        "command": "-workbench.action.showAllSymbols"
+        "command": "-workbench.action.showAllSymbols",
+        "when": "isMac"
     },
     {
         "key": "cmd+t",
-        "command": "workbench.action.quickOpen"
+        "command": "workbench.action.quickOpen",
+        "when": "isMac"
+    },
+
+    {
+        "key": "ctrl+t",
+        "command": "-workbench.action.showAllSymbols",
+        "when": "isWindows"
+    },
+    {
+        "key": "shift+ctrl+r",
+        "command": "workbench.action.showAllSymbols",
+        "when": "isWindows && !inSearchEditor"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.quickOpen",
+        "when": "isWindows"
+    },
+
+    // ---
+
+    {
+        "key": "shift+cmd+f",
+        "command": "-workbench.action.findInFiles",
+        "when": "isMac"
     },
     {
         "key": "shift+cmd+f",
-        "command": "-workbench.action.findInFiles"
+        "command": "search.action.openNewEditor",
+        "when": "isMac"
     },
     {
-        "key": "shift+cmd+f",
-        "command": "search.action.openNewEditor"
+        "key": "shift+ctrl+f",
+        "command": "-workbench.action.findInFiles",
+        "when": "isWindows"
     },
+    {
+        "key": "shift+ctrl+f",
+        "command": "search.action.openNewEditor",
+        "when": "isWindows"
+    },
+
+    // ---
+
+    {
+        "key": "shift+cmd+l",
+        "command": "-addCursorsAtSearchResults",
+        "when": "isMac && fileMatchOrMatchFocus && searchViewletVisible"
+    },
+    {
+        "key": "shift+cmd+l",
+        "command": "-selectAllSearchEditorMatches",
+        "when": "isMac && inSearchEditor"
+    },
+    {
+        "key": "shift+cmd+l",
+        "command": "-editor.action.selectHighlights",
+        "when": "isMac && editorFocus"
+    },
+
+    {
+        "key": "shift+ctrl+l",
+        "command": "-addCursorsAtSearchResults",
+        "when": "isWindows && fileMatchOrMatchFocus && searchViewletVisible"
+    },
+    {
+        "key": "shift+ctrl+l",
+        "command": "-selectAllSearchEditorMatches",
+        "when": "isWindows && inSearchEditor"
+    },
+    {
+        "key": "shift+ctrl+l",
+        "command": "-editor.action.selectHighlights",
+        "when": "isWindows && editorFocus"
+    },
+
     {
         "key": "shift+alt+g",
         "command": "editor.action.selectHighlights",
         "when": "editorFocus"
     },
-    {
-        "key": "shift+cmd+l",
-        "command": "-editor.action.selectHighlights",
-        "when": "editorFocus"
-    },
+
+    // ---
+
     {
         "key": "shift+cmd+l",
         "command": "editor.action.insertCursorAtEndOfEachLineSelected",
-        "when": "editorTextFocus"
+        "when": "isMac && editorTextFocus"
     },
+
+    {
+        "key": "shift+ctrl+l",
+        "command": "editor.action.insertCursorAtEndOfEachLineSelected",
+        "when": "isWindows && editorTextFocus"
+    },
+
     {
         "key": "shift+alt+i",
         "command": "-editor.action.insertCursorAtEndOfEachLineSelected",
         "when": "editorTextFocus"
     },
-    {
-        "key": "shift+cmd+l",
-        "command": "-addCursorsAtSearchResults",
-        "when": "fileMatchOrMatchFocus && searchViewletVisible"
-    },
-    {
-        "key": "shift+cmd+l",
-        "command": "-selectAllSearchEditorMatches",
-        "when": "inSearchEditor"
-    },
+
+    // ---
+
     {
         "key": "shift+cmd+\\",
         "command": "-editor.action.jumpToBracket",
-        "when": "editorTextFocus"
+        "when": "isMac && editorTextFocus"
     },
     {
         "key": "shift+cmd+\\",
-        "command": "workbench.action.splitEditor"
+        "command": "workbench.action.splitEditor",
+        "when": "isMac"
     },
     {
         "key": "cmd+\\",
-        "command": "-workbench.action.splitEditor"
+        "command": "-workbench.action.splitEditor",
+        "when": "isMac"
     },
+
+    {
+        "key": "shift+ctrl+\\",
+        "command": "-editor.action.jumpToBracket",
+        "when": "isWindows && editorTextFocus"
+    },
+    {
+        "key": "shift+ctrl+\\",
+        "command": "workbench.action.splitEditor",
+        "when": "isWindows"
+    },
+    {
+        "key": "ctrl+\\",
+        "command": "-workbench.action.splitEditor",
+        "when": "isWindows"
+    },
+
+    // ---
+
+
     {
         "key": "shift+cmd+c",
         "command": "-workbench.action.terminal.openNativeConsole",
-        "when": "!terminalFocus"
+        "when": "isMac && !terminalFocus"
     },
+
+    {
+        "key": "shift+ctrl+c",
+        "command": "-workbench.action.terminal.openNativeConsole",
+        "when": "isWindows && !terminalFocus"
+    },
+
+    // ---
+
     {
         "key": "shift+cmd+t",
         "command": "-extension.goToSpec",
-        "when": "editorTextFocus"
+        "when": "isMac && editorTextFocus"
     },
     {
         "key": "shift+cmd+,",
         "command": "-editor.action.inPlaceReplace.up",
-        "when": "editorTextFocus && !editorReadonly"
+        "when": "isMac && editorTextFocus && !editorReadonly"
     },
     {
         "key": "shift+cmd+,",
         "command": "extension.goToSpec",
-        "when": "editorTextFocus"
+        "when": "isMac && editorTextFocus"
+    },
+
+    {
+        "key": "shift+ctrl+t",
+        "command": "-extension.goToSpec",
+        "when": "isWindows && editorTextFocus"
     },
     {
-        "key": "shift+cmd+/",
-        "command": "workbench.action.chat.open"
+        "key": "shift+ctrl+,",
+        "command": "-editor.action.inPlaceReplace.up",
+        "when": "isWindows && editorTextFocus && !editorReadonly"
     },
+    {
+        "key": "shift+ctrl+,",
+        "command": "extension.goToSpec",
+        "when": "isWindows && editorTextFocus"
+    },
+
+    // ---
+
+    // Inline chat:
+    //   - mac: cmd+i (kept)
+    //   - windows: ctrl+i (kept)
+    // Open chat panel:
+    //   - mac: ctrl+cmd+i --> shift+cmd+i
+    //   - windows: ctrl+alt+i --> ctrl+shift+i
+    // Open chat panel (selecting agent mode):
+    //   - mac: shift+cmd+i --> [removed to avoid confusion and conflict with above]
+    //   - windows: ctrl+shift+i --> [removed to avoid confusion and conflict with above]
+
     {
         "key": "ctrl+cmd+i",
-        "command": "-workbench.action.chat.open"
+        "command": "-workbench.action.chat.open",
+        "when": "isMac"
     },
     {
-        "key": "cmd+shift+.",
-        "command": "workbench.action.tasks.runTask",
-        "args": "(rspec) run all tests"
+        "key": "shift+cmd+i",
+        "command": "workbench.action.chat.open",
+        "when": "isMac"
     },
     {
-        "key": "cmd+shift+m",
-        "command": "workbench.action.tasks.runTask",
-        "args": "(rspec) run current file"
+        "key": "ctrl+alt+i",
+        "command": "-workbench.action.chat.open",
+        "when": "isWindows"
     },
     {
-        "key": "cmd+shift+r",
-        "command": "workbench.action.tasks.runTask",
-        "args": "(rspec) run current test"
+        "key": "ctrl+shift+i",
+        "command": "workbench.action.chat.open",
+        "when": "isWindows"
     },
-    {
 
-        "key": "alt+shift+r",
-        "command": "workbench.action.tasks.runTask",
-        "args": "(rspec) run changed tests"
-    }
+    // ---
+
+
+    // {
+    //     "key": "cmd+shift+.",
+    //     "command": "workbench.action.tasks.runTask",
+    //     "args": "(rspec) run all tests",
+    //     "when": "isMac"
+    // },
+    // {
+    //     "key": "cmd+shift+m",
+    //     "command": "workbench.action.tasks.runTask",
+    //     "args": "(rspec) run current file",
+    //     "when": "isMac"
+    // },
+    // {
+    //     "key": "cmd+shift+r",
+    //     "command": "workbench.action.tasks.runTask",
+    //     "args": "(rspec) run current test",
+    //     "when": "isMac"
+    // },
+    // {
+
+    //     "key": "alt+shift+r",
+    //     "command": "workbench.action.tasks.runTask",
+    //     "args": "(rspec) run changed tests",
+    //     "when": "isMac"
+    // }
 ]
