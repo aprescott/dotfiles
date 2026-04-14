@@ -35,6 +35,118 @@
     // ---
 
     {
+        "key": "ctrl+alt+down",
+        "command": "-editor.action.insertCursorBelow",
+        "when": "isWindows && editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+down",
+        "command": "workbench.action.moveEditorToBelowGroup",
+        "when": "isWindows && editorTextFocus"
+    },
+
+    {
+        "key": "ctrl+alt+up",
+        "command": "-editor.action.insertCursorAbove",
+        "when": "isWindows && editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+up",
+        "command": "workbench.action.moveEditorToAboveGroup",
+        "when": "isWindows && editorTextFocus"
+    },
+
+    // ---
+
+    {
+        "key": "ctrl+pagedown",
+        "command": "-workbench.action.nextEditor",
+        "when": "isWindows"
+    },
+    {
+        "key": "ctrl+pageup",
+        "command": "-workbench.action.previousEditor",
+        "when": "isWindows"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
+        "when": "isWindows && !activeEditorGroupEmpty"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
+        "when": "isWindows && !activeEditorGroupEmpty"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.nextEditor",
+        "when": "isWindows"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.previousEditor",
+        "when": "isWindows"
+    },
+
+
+
+    // ---
+
+    {
+        "key": "ctrl+e",
+        "command": "-workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "-workbench.view.explorer",
+        "when": "isWindows && viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "runCommands",
+        "when": "isWindows && viewContainer.workbench.view.explorer.enabled",
+        "args": {
+            "commands": [
+                {
+                    "command": "workbench.view.explorer",
+                    "when": "!explorerViewletVisible"
+                },
+                {
+                    "command": "workbench.files.action.showActiveFileInExplorer",
+                    "when": "explorerViewletVisible"
+                }
+            ]
+        }
+    },
+
+    // ---
+
+    {
+        "key": "cmd+0",
+        "command": "-workbench.action.focusSideBar",
+        "when": "isMac"
+    },
+    {
+        "key": "cmd+0",
+        "command": "workbench.action.zoomReset",
+        "when": "isMac"
+    },
+
+    {
+        "key": "ctrl+0",
+        "command": "-workbench.action.focusSideBar",
+        "when": "isWindows"
+    },
+    {
+        "key": "ctrl+0",
+        "command": "workbench.action.zoomReset",
+        "when": "isWindows"
+    },
+
+    // ---
+
+    {
         "key": "shift+cmd+f",
         "command": "-workbench.action.findInFiles",
         "when": "isMac"

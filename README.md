@@ -34,11 +34,23 @@ find ../../dotfiles/kitty -type f -maxdepth 1 |
   xargs -L 1 -I {} ln -f -s {}
 ```
 
+## [WIP] Initial setup (Windows, Powershell)
+
+```powershell
+New-Item -ItemType SymbolicLink -Path ~/.gitconfig-global -Target ~/dotfiles/.gitconfig-global
+
+cp $env:APPDATA/Code/User/keybindings.json $env:APPDATA/Code/User/keybindings.json.original
+New-Item -ItemType SymbolicLink -Path $env:APPDATA/Code/User/keybindings.json -Target C:/Users/USERNAME/dotfiles/vs-code-user-keybindings.json
+
+cp $env:APPDATA/Code/User/settings.json $env:APPDATA/Code/User/settings.json.original
+New-Item -ItemType SymbolicLink -Path $env:APPDATA/Code/User/settings.json -Target C:/Users/USERNAME/dotfiles/vs-code-user-settings.json
+```
+
 ### Git config
 
 `~/.gitconfig`:
 
-```
+```ini
 [include]
 	path=~/.gitconfig-global
 
@@ -47,14 +59,14 @@ find ../../dotfiles/kitty -type f -maxdepth 1 |
 
 Useful conditional config:
 
-```
+```ini
 [includeIf "gitdir:~/code/"]
     path = ~/.gitconfig-work
 ```
 
 Then, e.g., in `~/.gitconfig-work`:
 
-```
+```ini
 [user]
     email = you@work.example.com
 ```
@@ -63,7 +75,7 @@ Then, e.g., in `~/.gitconfig-work`:
 
 At the top of `~/.ssh/config`:
 
-```
+```ssh-config
 Include "~/.ssh-global-config"
 ```
 

@@ -1,105 +1,154 @@
 {
-    "telemetry.enableTelemetry": false,
-    "editor.cursorBlinking": "phase",
-    "editor.cursorStyle": "line-thin",
-    "files.autoSave": "onFocusChange",
-    "workbench.editor.highlightModifiedTabs": true,
-    "workbench.settings.openDefaultSettings": true,
-    "workbench.settings.useSplitJSON": true,
-    "workbench.settings.openDefaultKeybindings": true,
-    "files.trimTrailingWhitespace": true,
-    "editor.scrollBeyondLastLine": false,
-    "workbench.startupEditor": "newUntitledFile",
-    "[javascript]": {
-        "editor.tabSize": 2,
-    },
-    "diffEditor.ignoreTrimWhitespace": false,
-    "trailing-spaces.highlightCurrentLine": false,
-    "files.trimFinalNewlines": true,
-    "files.insertFinalNewline": true,
-    "window.newWindowDimensions": "maximized",
-    "gitlens.currentLine.enabled": false,
-    "gitlens.hovers.currentLine.over": "line",
-    "gitlens.codeLens.scopes": [
-        "document",
-        "containers"
-    ],
-    "gitlens.codeLens.enabled": false,
-    "gitlens.hovers.avatars": false,
-    "gitlens.views.repositories.location": "gitlens",
-    "gitlens.views.fileHistory.location": "gitlens",
-    "gitlens.views.lineHistory.location": "gitlens",
-    "gitlens.views.compare.location": "gitlens",
-    "gitlens.views.search.location": "gitlens",
-    "gitlens.hovers.enabled": false,
-    "workbench.editor.enablePreviewFromQuickOpen": false,
-    "search.searchEditor.defaultNumberOfContextLines": 2,
-    "search.showLineNumbers": true,
-    "search.searchEditor.reusePriorSearchConfiguration": true,
-    "editor.rulers": [
-        80,
-        120
-    ],
-    // Only needed for default-y color themes.
-    // Custom ones tend to set more appropriate values.
-    // "workbench.colorCustomizations": {
-    //     "statusBar.background" : "#222222",
-    //     "statusBar.foreground": "#b1b1b1",
-    //     "statusBar.noFolderBackground" : "#222222",
-    //     "statusBar.debuggingBackground": "#511f1f"
-    // },
-    "search.maintainFileSearchCache": true,
-    "editor.columnSelection": false,
-    "workbench.editor.decorations.badges": true,
-    "workbench.editor.decorations.colors": true,
-    "catppuccin.italicKeywords": false,
-    "catppuccin.italicComments": false,
-    "catppuccin.accentColor": "rosewater",
-    "catppuccin.workbenchMode": "flat",
-    "byesig.opacity": 0.75,
-    "byesig.showIcon": false,
-    "byesig.fold": false,
-    "[ruby]": {
-        "editor.tabSize": 2,
-        "editor.formatOnSave": false
-    },
-    "solargraph.hover": false,
-    // ruby extension handles formatting
-    "solargraph.autoformat": false,
-    "solargraph.formatting": false,
-    "rubyLsp.formatter": "auto",
-    "editor.guides.bracketPairs": true,
-    "[scss]": {
-        "editor.tabSize": 2
-    },
-    "editor.minimap.showSlider": "always",
-    "solargraph.references": false,
-    // for Copilot
-    "editor.inlineSuggest.enabled": true,
-    // much more pleasant rapid x'ing
-    "workbench.editor.tabSizing": "fixed",
-    "terminal.integrated.inheritEnv": false,
-    "github.copilot.enable": {
-        "*": true,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false
-    },
+    "telemetry.telemetryLevel": "off",
+    "settingsSync.keybindingsPerPlatform": false,
+
+    "workbench.activityBar.location": "top",
+
+    // "security.workspace.trust.banner": "untilDismissed",
+    "security.workspace.trust.banner": "never",
+
     "editor.stickyScroll.enabled": true,
     "accessibility.dimUnfocused.enabled": true,
     "accessibility.dimUnfocused.opacity": 0.9,
     "workbench.editor.pinnedTabsOnSeparateRow": true,
-    "[html]": {
+    "workbench.tree.enableStickyScroll": true,
+
+    "window.newWindowDimensions": "maximized",
+    "workbench.startupEditor": "newUntitledFile",
+
+    "workbench.editor.decorations.badges": true,
+    "workbench.editor.decorations.colors": true,
+
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.settings.openDefaultSettings": true,
+    "workbench.settings.useSplitJSON": true,
+    "workbench.settings.openDefaultKeybindings": true,
+
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+
+    // much more pleasant rapid x'ing
+    "workbench.editor.tabSizing": "fixed",
+
+    "terminal.integrated.inheritEnv": false,
+
+    "editor.inlineSuggest.fontFamily": "Monaspace Neon Var, monospace",
+    // "editor.fontLigatures": "'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08'",
+    // "editor.fontFamily": "'Monaspace Neon Var', Menlo, Monaco, 'Courier New', monospace",
+    // "editor.fontVariations": "'wght' 300",
+
+    "editor.cursorBlinking": "phase",
+    "editor.cursorStyle": "line-thin",
+
+    "workbench.colorTheme": "GitHub Dark Default",
+
+    "workbench.colorCustomizations": {
+        "[GitHub Dark Default]": {
+            "editor.selectionBackground": "#78242b",
+            "editor.inactiveSelectionBackground": "#600b18e0",
+            "editorWhitespace.foreground": "#f0c2b990",
+
+            // When text is selected, this is the non-selected matching content.
+            "editor.selectionHighlightBackground": "#520e16f0",
+            "editor.selectionHighlightBorder": "#78242b40",
+
+            "editor.lineHighlightBackground": "#22262e",
+
+            // Ctrl/Cmd + F highlights.
+            "editor.findMatchHighlightBackground": "#d6b03f60",
+
+            // Instances of _words_ under the cursor.
+            "editor.wordHighlightBackground": "#00000000",
+            "editor.wordHighlightBorder": "#81717199",
+
+            "editorOverviewRuler.selectionHighlightForeground": "#78242b20",
+        }
+    },
+
+    "editor.tokenColorCustomizations": {
+        "[GitHub Dark Default]": {
+            "comments": "#9e8f8d",
+            "textMateRules": [
+                {
+                    "scope": "comment",
+                    "settings": {
+                        "fontStyle": "italic",
+                    }
+                }
+            ]
+        }
+    },
+
+    "files.autoSave": "onFocusChange",
+    "files.eol": "\n",
+    "files.trimFinalNewlines": true,
+    "files.insertFinalNewline": true,
+
+    "files.trimTrailingWhitespace": true,
+    "trailing-spaces.highlightCurrentLine": false,
+
+    "editor.minimap.showSlider": "always",
+    "editor.minimap.autohide": "mouseover",
+    "editor.minimap.scale": 2,
+
+    "editor.guides.bracketPairs": true,
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "rewrap.wrappingColumn": 80,
+    "rewrap.autoWrap.enabled": true,
+
+    "editor.columnSelection": false,
+    "editor.scrollBeyondLastLine": false,
+    "editor.wordWrap": "off",
+    "editor.wrappingIndent": "same",
+    "editor.renderWhitespace": "selection",
+
+    "editor.formatOnPaste": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "always",
+        "source.addMissingImports": "always",
+    },
+
+    "diffEditor.ignoreTrimWhitespace": false,
+
+    "search.searchEditor.defaultNumberOfContextLines": 2,
+    "search.showLineNumbers": true,
+    "search.searchEditor.reusePriorSearchConfiguration": true,
+
+    "[css]": {
         "editor.tabSize": 2
     },
     "[erb]": {
         "editor.tabSize": 2
     },
-    "[css]": {
+    "[html]": {
+        "editor.tabSize": 2,
+        "rewrap.autoWrap.enabled": false
+    },
+    "[javascript]": {
+        "editor.tabSize": 2,
+    },
+    "[ruby]": {
+        "editor.tabSize": 2,
+        "editor.formatOnSave": false
+    },
+    "[rust]": {
+        "editor.formatOnSave": true
+    },
+    "[scss]": {
         "editor.tabSize": 2
     },
-    "tailwind-fold.autoFold": false,
-    "workbench.colorTheme": "GitHub Dark Default",
+
+    "byesig.opacity": 0.75,
+    "byesig.showIcon": false,
+    "byesig.fold": false,
+    "solargraph.hover": false,
+    // ruby extension handles formatting
+    "solargraph.autoformat": false,
+    "solargraph.formatting": false,
+    "solargraph.references": false,
+    "rubyLsp.formatter": "auto",
     "rubyLsp.enabledFeatures": {
         "inlayHint": false,
     },
@@ -108,15 +157,21 @@
             "gemfileLinks": false
         }
     },
-    // "editor.fontLigatures": "'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08'",
-    // "editor.fontFamily": "'Monaspace Neon Var', Menlo, Monaco, 'Courier New', monospace",
-    // "editor.fontVariations": "'wght' 300",
-    "workbench.tree.enableStickyScroll": true,
-    "editor.inlineSuggest.fontFamily": "Monaspace Neon Var",
-    "security.workspace.trust.banner": "never",
-    "github.copilot.editor.enableAutoCompletions": true,
-    "workbench.activityBar.location": "top",
     "rubyLsp.featureFlags": {
         "launcher": false
-    }
+    },
+
+    "tailwind-fold.autoFold": false,
+
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": true,
+        "markdown": true,
+        "scminput": true,
+        "html": true
+    },
+    "chat.requestQueuing.defaultAction": "queue",
+    "chat.viewSessions.orientation": "stacked",
+    "github.copilot.nextEditSuggestions.enabled": true,
 }
