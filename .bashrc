@@ -13,6 +13,9 @@ if [ -d ~/etc ]; then
 fi
 
 export PATH=~/bin:$PATH
+
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
 export PATH=/opt/android-sdk/platform-tools:/opt/android-sdk/tools:$PATH
 export PATH=/opt/android-ndk:$PATH
 
@@ -121,4 +124,4 @@ fi # end interactive-specifics
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export FX_THEME=3
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
