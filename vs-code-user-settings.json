@@ -7,14 +7,23 @@
     // "security.workspace.trust.banner": "untilDismissed",
     "security.workspace.trust.banner": "never",
 
+    "editor.mouseWheelScrollSensitivity": 2,
+    "editor.scrollBeyondLastLine": false,
+    "editor.padding.bottom": 50,
+    "editor.smoothScrolling": true,
     "editor.stickyScroll.enabled": true,
+    "workbench.tree.enableStickyScroll": true,
     "accessibility.dimUnfocused.enabled": true,
     "accessibility.dimUnfocused.opacity": 0.9,
     "workbench.editor.pinnedTabsOnSeparateRow": true,
-    "workbench.tree.enableStickyScroll": true,
+    "editor.snippetSuggestions": "top",
+
+    "editor.linkedEditing": true,
 
     "window.newWindowDimensions": "maximized",
     "workbench.startupEditor": "newUntitledFile",
+
+    "workbench.localHistory.maxFileEntries": 200,
 
     "workbench.editor.decorations.badges": true,
     "workbench.editor.decorations.colors": true,
@@ -43,25 +52,44 @@
 
     "workbench.colorCustomizations": {
         "[GitHub Dark Default]": {
-            "editor.selectionBackground": "#78242b",
-            "editor.inactiveSelectionBackground": "#600b18e0",
-            "editorWhitespace.foreground": "#f0c2b990",
+            "activityBarBadge.background": "#78242b",
+            "badge.background": "#78242b",
+            "focusBorder": "#78242b",
+            "progressBar.background": "#78242b",
+            "statusBar.focusBorder": "#78242b80",
+            "statusBarItem.focusBorder": "#78242b",
 
-            // When text is selected, this is the non-selected matching content.
-            "editor.selectionHighlightBackground": "#520e16f0",
-            "editor.selectionHighlightBorder": "#78242b40",
+            "editorCursor.foreground": "#ff00aa",
+
+            "editorBracketMatch.background": "#3fb95040",
+            "editorBracketMatch.border": "#3fb95010",
+
+            "editorWhitespace.foreground": "#f0c2b990",
 
             "editor.lineHighlightBackground": "#22262e",
 
             // Ctrl/Cmd + F highlights.
             "editor.findMatchHighlightBackground": "#d6b03f60",
 
+            "editor.selectionBackground": "#78242b",
+            "editor.inactiveSelectionBackground": "#600b18e0",
+            // When text is selected, this is the non-selected matching content.
+            "editor.selectionHighlightBackground": "#520e16f0",
+            "editor.selectionHighlightBorder": "#78242b40",
+
             // Instances of _words_ under the cursor.
             "editor.wordHighlightBackground": "#00000000",
+            "editor.wordHighlightTextBackground": "#00000000",
+            "editor.wordHighlightStrongBackground": "#00000000",
             "editor.wordHighlightBorder": "#81717199",
+            "editor.wordHighlightStrongBorder": "#81717199",
+            "editor.wordHighlightTextBorder": "#81717199",
+            // Unchanged:
+            // "editor.symbolHighlightBackground"
+            // "editor.symbolHighlightBorder"
 
             "editorOverviewRuler.selectionHighlightForeground": "#78242b20",
-        }
+        },
     },
 
     "editor.tokenColorCustomizations": {
@@ -72,10 +100,10 @@
                     "scope": "comment",
                     "settings": {
                         "fontStyle": "italic",
-                    }
-                }
-            ]
-        }
+                    },
+                },
+            ],
+        },
     },
 
     "files.autoSave": "onFocusChange",
@@ -85,29 +113,24 @@
 
     "files.trimTrailingWhitespace": true,
     "trailing-spaces.highlightCurrentLine": false,
-
-    "editor.minimap.showSlider": "always",
-    "editor.minimap.autohide": "mouseover",
+    "editor.minimap.autohide": "none",
     "editor.minimap.scale": 2,
+    "editor.minimap.showSlider": "always",
 
     "editor.guides.bracketPairs": true,
-    "editor.rulers": [
-        80,
-        120
-    ],
+    "editor.rulers": [80, 120],
     "rewrap.wrappingColumn": 80,
     "rewrap.autoWrap.enabled": true,
 
     "editor.columnSelection": false,
-    "editor.scrollBeyondLastLine": false,
     "editor.wordWrap": "off",
     "editor.wrappingIndent": "same",
     "editor.renderWhitespace": "selection",
 
     "editor.formatOnPaste": true,
     "editor.codeActionsOnSave": {
-        "source.organizeImports": "always",
-        "source.addMissingImports": "always",
+        // "source.organizeImports": "always",
+        // "source.addMissingImports": "always",
     },
 
     "diffEditor.ignoreTrimWhitespace": false,
@@ -117,27 +140,29 @@
     "search.searchEditor.reusePriorSearchConfiguration": true,
 
     "[css]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
     },
     "[erb]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
     },
     "[html]": {
         "editor.tabSize": 2,
-        "rewrap.autoWrap.enabled": false
+        "rewrap.autoWrap.enabled": false,
     },
     "[javascript]": {
         "editor.tabSize": 2,
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file",
     },
     "[ruby]": {
         "editor.tabSize": 2,
-        "editor.formatOnSave": false
+        "editor.formatOnSave": false,
     },
     "[rust]": {
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
     },
     "[scss]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
     },
 
     "byesig.opacity": 0.75,
@@ -154,11 +179,11 @@
     },
     "rubyLsp.featuresConfiguration": {
         "codeLens": {
-            "gemfileLinks": false
-        }
+            "gemfileLinks": false,
+        },
     },
     "rubyLsp.featureFlags": {
-        "launcher": false
+        "launcher": false,
     },
 
     "tailwind-fold.autoFold": false,
@@ -169,9 +194,13 @@
         "plaintext": true,
         "markdown": true,
         "scminput": true,
-        "html": true
+        "html": true,
     },
     "chat.requestQueuing.defaultAction": "queue",
     "chat.viewSessions.orientation": "stacked",
     "github.copilot.nextEditSuggestions.enabled": true,
+    "python.languageServer": "Pylance",
+    "workbench.browser.enableChatTools": true,
+    "git.autofetch": true,
+    "editor.minimap.size": "fit",
 }
