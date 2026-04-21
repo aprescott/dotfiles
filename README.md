@@ -36,6 +36,16 @@ find ../../dotfiles/kitty -type f -maxdepth 1 |
 
 ## [WIP] Initial setup (Windows, Powershell)
 
+In `$PROFILE`:
+
+```powershell
+$custom = "$HOME\dotfiles\powershell\profile.ps1"
+
+if (Test-Path $custom) {
+    . $custom
+}
+```
+
 ```powershell
 New-Item -ItemType SymbolicLink -Path ~/.gitconfig-global -Target ~/dotfiles/.gitconfig-global
 
