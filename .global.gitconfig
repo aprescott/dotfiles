@@ -1,15 +1,14 @@
 #
-# This file should sit along-side ~/.gitconfig, and contains "global"
-# configuration settings that are universal across machines.
+# To use this file, place an `include` in ~/.gitconfig:
 #
-# Place overriding settings in ~/.gitconfig, and ensure that you include this
-# file:
+#   [include]
+#       path = ~/dotfiles/.global.gitconfig
 #
-# [include]
-#	path = ~/.gitconfig-global
+# To add overrides, place them below the `include` section within your
+# ~/.gitconfig.
 #
-# For convenience, this file provides a global-config alias to add
-# configuration settings to this file:
+# For convenience, this file provides a global-config alias to add configuration
+# settings to this file:
 #
 #   git global-config ARGS
 #
@@ -69,7 +68,7 @@
 	unset __silent_jump_edit"
 
 	back = "!git switch main && git pull && git remote prune origin && git delete-merged-branches"
-	global-config = "!git config --file ~/.gitconfig-global"
+	global-config = "!git config --file ~/.global.gitconfig"
 	wip = "commit -m wip"
 	wipwip = "!git add . && git commit -m wip"
 	# new = "!newbranchfunc() { name="$*"; git switch -c aprescott/\"${name// /-}\"; }; newbranchfunc"

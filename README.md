@@ -1,6 +1,6 @@
 ## Initial setup
 
-Home dotfiles:
+Home dotfile symlinking:
 
 ```bash
 cd $HOME
@@ -9,6 +9,7 @@ find dotfiles -type f -maxdepth 1 |
   grep -v '^dotfiles/vs-code-' |
   grep -v README.md |
   grep -v .gitignore |
+  grep -v .global.gitconfig |
   xargs -L 1 -I {} ln -f -s {}
 
 mkdir -p .vim
@@ -47,8 +48,6 @@ if (Test-Path $custom) {
 ```
 
 ```powershell
-New-Item -ItemType SymbolicLink -Path ~/.gitconfig-global -Target ~/dotfiles/.gitconfig-global
-
 cp $env:APPDATA/Code/User/keybindings.json $env:APPDATA/Code/User/keybindings.json.original
 New-Item -ItemType SymbolicLink -Path $env:APPDATA/Code/User/keybindings.json -Target C:/Users/USERNAME/dotfiles/vs-code-user-keybindings.json
 
@@ -62,23 +61,23 @@ New-Item -ItemType SymbolicLink -Path $env:APPDATA/Code/User/settings.json -Targ
 
 ```ini
 [include]
-	path=~/.gitconfig-global
+  path=~/dotfiles/.global.gitconfig
 
 # Any other non-global, overriding settings below
 ```
 
-Useful conditional config:
+Example useful conditional config:
 
 ```ini
 [includeIf "gitdir:~/code/"]
-    path = ~/.gitconfig-work
+  path = ~/.work.gitconfig
 ```
 
-Then, e.g., in `~/.gitconfig-work`:
+Then, e.g., in `~/.work.gitconfig`:
 
 ```ini
 [user]
-    email = you@work.example.com
+  email = you@work.example.com
 ```
 
 ### Global SSH Config
@@ -86,7 +85,7 @@ Then, e.g., in `~/.gitconfig-work`:
 At the top of `~/.ssh/config`:
 
 ```ssh-config
-Include "~/.ssh-global-config"
+Include "~/dotfiles/ssh/ssh_config"
 ```
 
 ### VS Code
