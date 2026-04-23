@@ -32,6 +32,8 @@
 	delete-merged-branches = !git branch --merged | grep -v '^\\*' | grep -v '\\bmaster\\b' | grep -v '\\bmain\\b' | sed -e 's/^ *//g' | tr '\\n' '\\0' | xargs -0 git branch -d
 	redo-commit = "!__redo_commit_f() { CURRENT_AUTHOR=$(git log -1 --format=\"%ae\"); RESET_AUTHOR_OPTION=\"\"; if [ \"$CURRENT_AUTHOR\" = \"$(git config user.email)\" ]; then RESET_AUTHOR_OPTION=\"--reset-author\"; fi; git --no-pager log -1 && git commit --amend $RESET_AUTHOR_OPTION -C HEAD; }; __redo_commit_f; unset __redo_commit_f"
 	reword-commit = "!__redo_commit_f() { CURRENT_AUTHOR=$(git log -1 --format=\"%ae\"); RESET_AUTHOR_OPTION=\"\"; if [ \"$CURRENT_AUTHOR\" = \"$(git config user.email)\" ]; then RESET_AUTHOR_OPTION=\"--reset-author\"; fi; git --no-pager log -1 && git commit --amend $RESET_AUTHOR_OPTION; }; __redo_commit_f; unset __redo_commit_f"
+	# Edit without changing any timestamp or author metadata.
+	amend-silent = "!__edit_silent_f() { AUTHOR_DATE=$(git log -1 --format=\"%aI\"); COMMIT_DATE=$(git log -1 --format=\"%cI\"); git --no-pager log -1 && GIT_COMMITTER_DATE=\"$COMMIT_DATE\" GIT_AUTHOR_DATE=\"$AUTHOR_DATE\" git commit --amend --no-edit; }; __edit_silent_f; unset __edit_silent_f"
 	back = "!git switch main && git pull && git remote prune origin && git delete-merged-branches"
 	global-config = "!git config --file ~/.gitconfig-global"
 	wip = "commit -m wip"
