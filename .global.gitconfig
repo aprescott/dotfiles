@@ -25,6 +25,8 @@
 	autosquash = true
 [color]
 	ui = true
+[format]
+	pretty = fuller
 [alias]
 	st = status
 	log-graph = log --graph --oneline --decorate --all
