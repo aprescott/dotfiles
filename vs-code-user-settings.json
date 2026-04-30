@@ -149,6 +149,9 @@
         "editor.tabSize": 2,
         "rewrap.autoWrap.enabled": false,
     },
+    "[ini]": {
+        "rewrap.autoWrap.enabled": false,
+    },
     "[javascript]": {
         "editor.tabSize": 2,
         "editor.formatOnSave": true,
@@ -197,10 +200,23 @@
         "html": true,
     },
     "chat.requestQueuing.defaultAction": "queue",
-    "chat.viewSessions.orientation": "stacked",
+    "chat.experimental.incrementalRendering.enabled": true,
+    "chat.experimental.incrementalRendering.animationStyle": "blur",
     "github.copilot.nextEditSuggestions.enabled": true,
     "python.languageServer": "Pylance",
     "workbench.browser.enableChatTools": true,
     "git.autofetch": true,
     "editor.minimap.size": "fit",
+    "chat.tools.urls.autoApprove": {
+        "https://code.visualstudio.com": true,
+        "https://github.com/microsoft/vscode/wiki/*": true,
+        "https://developer.mozilla.org/en-US/docs": true,
+        "https://drafts.csswg.org": true,
+        "https://stackoverflow.com/questions": true,
+    },
+    // Don't use the VS Code specific profile.
+    "powershell.enableProfileLoading": false,
+    // Don't show the extension terminal. Integrated is fine.
+    "powershell.integratedConsole.startInBackground": true,
+    "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
 }
