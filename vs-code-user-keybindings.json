@@ -367,6 +367,34 @@
 
     // ---
 
+    {
+        "key": "ctrl+shift+cmd+b",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.closeSidebar",
+                "workbench.action.closePanel",
+                "workbench.action.closeAuxiliaryBar",
+            ]
+        },
+        "when": "isMac && (sidebarVisible || panelVisible || auxiliaryBarVisible)"
+    },
+
+    {
+        "key": "ctrl+shift+alt+b",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.closeSidebar",
+                "workbench.action.closePanel",
+                "workbench.action.closeAuxiliaryBar",
+            ]
+        },
+        "when": "isWindows && (sidebarVisible || panelVisible || auxiliaryBarVisible)"
+    },
+
+    // ---
+
     // Inline chat:
     //   - mac: cmd+i (kept)
     //   - windows: ctrl+i (kept)
@@ -454,4 +482,23 @@
         "command": "-chatEditor.action.undoHunk",
         "when": "isMac && (chatEdits.cursorInChangeRange && chatEdits.hasEditorModifications && editorFocus && !chatEdits.isCurrentlyBeingModified || chatEdits.cursorInChangeRange && chatEdits.hasEditorModifications && notebookCellListFocused && !chatEdits.isCurrentlyBeingModified)",
     },
+
+    // ---
+
+    {
+        "key": "ctrl+r",
+        "command": "-workbench.action.openRecent",
+        "when": "isWindows && !isSessionsWindow"
+    },
+    {
+        "key": "ctrl+r",
+        "command": "workbench.action.quickTextSearch",
+        "when": "isWindows && !isSessionsWindow"
+    },
+
+    {
+        "key": "cmd+r",
+        "command": "workbench.action.quickTextSearch",
+        "when": "isMac && editorTextFocus"
+    }
 ]
