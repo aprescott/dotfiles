@@ -1,0 +1,7 @@
+#!/bin/bash
+
+TARGET=$1
+
+git log -1 --format=fuller
+GIT_COMMITTER_DATE="$(git log -1 --format=%cI "$TARGET")" git commit --amend --allow-empty --no-edit --date "$(git log -1 --format=%aI "$TARGET")"
+git log -1 "$TARGET" --format=fuller

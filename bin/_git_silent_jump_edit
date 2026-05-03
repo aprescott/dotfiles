@@ -1,0 +1,29 @@
+#!/bin/bash
+
+TARGET=$(git rev-parse "$1")
+export TARGET
+
+__git_silent_jump_edit_process_file() {
+  awk -v TARGET="$TARGET" '
+    $1 == "pick" && $2 == TARGET {
+      $1 = "edit"
+    }
+
+    /^(pick|edit) [^ ]+/ {
+      hash = $2
+      print # Print the original line (with pick/edit)
+      printf "exec git time-copy %s\n", hash
+      next
+    }
+
+    { print }
+  ' "$1" > "$1.tmp" && mv "$1.tmp" "$1"
+  cat "$1"
+}
+
+export -f __git_silent_jump_edit_process_file
+
+GIT_SEQUENCE_EDITOR='bash -c "__git_silent_jump_edit_process_file \"$1\"" -- '
+export GIT_SEQUENCE_EDITOR
+
+git -c core.abbrev=40 rebase -i "${TARGET}^"

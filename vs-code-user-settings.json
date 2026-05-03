@@ -219,4 +219,9 @@
     // Don't show the extension terminal. Integrated is fine.
     "powershell.integratedConsole.startInBackground": true,
     "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
+    "github.copilot.chat.localIndex.enabled": true,
+
+    "terminal.integrated.autoReplies": {
+        "Terminate batch job (Y/N)": "Y\r"
+    }
 }

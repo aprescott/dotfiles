@@ -55,19 +55,12 @@
 	}; \
 	__redo_commit_f; \
 	unset __redo_commit_f"
-	time-copy = "!__time_copy() { TARGET=$1; git log -1 --format=fuller; GIT_COMMITTER_DATE=\"$(git log -1 --format=%cI \"$TARGET\")\" git commit --amend --no-edit --date \"$(git log -1 --format=%aI \"$TARGET\")\"; git log -1 $TARGET --format=fuller; }; __time_copy \"$@\"; unset __time_copy"
+	time-copy = "!bash ~/dotfiles/bin/_git_time_copy"
 
 	# `git silent-jump-edit FOO` will jump to commit FOO, allow you to make
 	# changes, and then run `git rebase --continue`. The commit author and
 	# commit timestamps from the original FOO commit will be preserved.
-	silent-jump-edit = "!__silent_jump_edit() { \
-		TARGET=$1; \
-		\
-		GIT_SEQUENCE_EDITOR='sed -i -e '\"'\"'s/^pick \\('\"$TARGET\"'.*\\)/edit \\1/'\"'\"' -e '\"'\"'s/^\\(pick\\|edit\\) \\([^ ]*\\).*/\\1 \\2\\nexec GIT_COMMITTER_DATE=$(git log -1 --format=%cI \\2) git commit --amend --no-edit --date $(git log -1 --format=%aI \\2)/'\"'\"'' \
-		git -c core.abbrev=40 rebase -i \"${TARGET}^\"; \
-	}; \
-	__silent_jump_edit \"$@\"; \
-	unset __silent_jump_edit"
+	silent-jump-edit = "!bash ~/dotfiles/bin/_git_silent_jump_edit"
 
 	back = "!git switch main && git pull && git remote prune origin && git delete-merged-branches"
 	global-config = "!git config --file ~/.global.gitconfig"
