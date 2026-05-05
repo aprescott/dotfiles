@@ -223,5 +223,13 @@
 
     "terminal.integrated.autoReplies": {
         "Terminate batch job (Y/N)": "Y\r"
+    },
+    "task.allowAutomaticTasks": "on",
+    "workbench.editorAssociations": {
+        "*.copilotmd": "vscode.markdown.preview.editor",
+        "*.svg": "default"
+    },
+    "chat.tools.terminal.autoApprove": {
+        "/^.*$": false,
     }
 }

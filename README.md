@@ -35,6 +35,29 @@ find ../../dotfiles/kitty -type f -maxdepth 1 |
   xargs -L 1 -I {} ln -f -s {}
 ```
 
+kitty custom icon (macOS):
+
+```shell
+cd $HOME
+cd .config/kitty
+
+# See https://sw.kovidgoyal.net/kitty/faq/#i-do-not-like-the-kitty-icon
+wget "https://github.com/k0nserv/kitty-icon/raw/refs/tags/2023-07-09/build/neue_outrun.icns"
+ln -s neue_outrun.icns kitty.app.icns
+
+# Restart kitty.
+# If necessary:
+rm /var/folders/*/*/*/com.apple.dock.iconcache; killall Dock
+```
+
+To undo:
+
+- Open the kitty app in Finder.
+- Cmd-I to open the app's info panel.
+- Click the app icon in the top left of the info panel.
+- Hit backspace to remove the custom icon.
+- Restart kitty and wipe the Dock icon cache if necessary.
+
 ## [WIP] Initial setup (Windows, Powershell)
 
 In `$PROFILE`:
