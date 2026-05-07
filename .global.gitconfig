@@ -29,6 +29,7 @@
 	pretty = fuller
 [alias]
 	st = status
+	detach = switch --detach
 	log-graph = log --graph --oneline --decorate --all
 	delete-merged-branches = !git branch --merged | grep -v '^\\*' | grep -v '\\bmaster\\b' | grep -v '\\bmain\\b' | sed -e 's/^ *//g' | tr '\\n' '\\0' | xargs -0 git branch -d
 	redo-commit = "!__redo_commit_f() { \
@@ -61,6 +62,7 @@
 	# changes, and then run `git rebase --continue`. The commit author and
 	# commit timestamps from the original FOO commit will be preserved.
 	silent-jump-edit = "!bash ~/dotfiles/bin/_git_silent_jump_edit"
+	silent-rebase = "!bash ~/dotfiles/bin/_git_silent_rebase"
 
 	back = "!git switch main && git pull && git remote prune origin && git delete-merged-branches"
 	global-config = "!git config --file ~/.global.gitconfig"

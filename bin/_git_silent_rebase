@@ -1,0 +1,9 @@
+#!/bin/bash
+
+source "$(dirname "$0")/__functions"
+export -f __git_time_copy_process_file
+
+GIT_SEQUENCE_EDITOR='bash -c "__git_time_copy_process_file \"$1\"" -- '
+export GIT_SEQUENCE_EDITOR
+
+git -c core.abbrev=40 rebase -i "$1"
