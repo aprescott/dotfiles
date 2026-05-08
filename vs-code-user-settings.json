@@ -8,6 +8,7 @@
     "security.workspace.trust.banner": "never",
 
     "editor.mouseWheelScrollSensitivity": 2,
+    "editor.scrollBeyondLastColumn": 20,
     "editor.scrollBeyondLastLine": false,
     "editor.padding.bottom": 50,
     "editor.smoothScrolling": true,
@@ -39,6 +40,7 @@
     "workbench.editor.tabSizing": "fixed",
 
     "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.tabs.enableAnimation": false,
 
     "editor.inlineSuggest.fontFamily": "Monaspace Neon Var, monospace",
     // "editor.fontLigatures": "'calt', 'liga', 'dlig', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08'",
@@ -147,6 +149,9 @@
     },
     "[html]": {
         "editor.tabSize": 2,
+        "rewrap.autoWrap.enabled": false,
+    },
+    "[markdown]": {
         "rewrap.autoWrap.enabled": false,
     },
     "[ini]": {

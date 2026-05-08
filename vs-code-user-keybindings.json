@@ -498,7 +498,70 @@
 
     {
         "key": "cmd+r",
-        "command": "workbench.action.quickTextSearch",
+        "command": "workbench.action.quickTextSearch"
+    },
+
+    // ---
+
+    {
+        "key": "ctrl+alt+j",
+        "command": "bookmarks.jumpToNext",
+        "when": "isWindows && editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+l",
+        "command": "-bookmarks.jumpToNext",
+        "when": "isWindows && editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+k",
+        "command": "bookmarks.jumpToPrevious",
+        "when": "isWindows && editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+j",
+        "command": "-bookmarks.jumpToPrevious",
+        "when": "isWindows && editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+l",
+        "command": "bookmarks.toggle",
+        "when": "isWindows && editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+k",
+        "command": "-bookmarks.toggle",
+        "when": "isWindows && editorTextFocus"
+    },
+
+    {
+        "key": "alt+cmd+j",
+        "command": "bookmarks.jumpToNext",
         "when": "isMac && editorTextFocus"
-    }
+    },
+    {
+        "key": "alt+cmd+l",
+        "command": "-bookmarks.jumpToNext",
+        "when": "isMac && editorTextFocus"
+    },
+    {
+        "key": "alt+cmd+k",
+        "command": "bookmarks.jumpToPrevious",
+        "when": "isMac && editorTextFocus"
+    },
+    {
+        "key": "alt+cmd+j",
+        "command": "-bookmarks.jumpToPrevious",
+        "when": "isMac && editorTextFocus"
+    },
+    {
+        "key": "alt+cmd+l",
+        "command": "bookmarks.toggle",
+        "when": "isMac && editorTextFocus"
+    },
+    {
+        "key": "alt+cmd+k",
+        "command": "-bookmarks.toggle",
+        "when": "isMac && editorTextFocus"
+    },
 ]
