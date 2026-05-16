@@ -102,9 +102,8 @@ if $interactive_shell; then
 	export GTK_IM_MODULE="xim"
 
 	export EDITOR=vim
-	export VISUAL=vim
-	export GIT_EDITOR=vim
-	export SVN_EDITOR=vim
+	export VISUAL="code --wait"
+	export GIT_EDITOR="code --wait"
 
 	export LSCOLORS="exfxcxdxbxegedabagacad" # default from man ls
 	export LSCOLORS="dxgxcxdxbxegedabagacad"
