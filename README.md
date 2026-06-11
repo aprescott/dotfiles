@@ -174,3 +174,23 @@ Then:
 $ coauthors alice
 Co-authored-by: Alice Foo <alice.foo@exampe.com>
 ```
+
+# Claude config
+
+`~/.claude/settings.json` needs a `CLAUDE_ENV_FILE` config:
+
+```json
+"env": {
+  "CLAUDE_ENV_FILE": "/path/to/claude_env.sh"
+}
+```
+
+Where `claude_env.sh` contains:
+
+```bash
+source ~/.bashrc
+```
+
+Without it, automatic Ruby switching won't work, for reasons I don't fully understand. Probably the lack of env var persistence across commands. https://code.claude.com/docs/en/tools-reference#bash-tool-behavior says:
+
+> Environment variables do not persist. An `export` in one command will not be available in the next.
