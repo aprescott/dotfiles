@@ -141,6 +141,13 @@
     "search.showLineNumbers": true,
     "search.searchEditor.reusePriorSearchConfiguration": true,
 
+    "[git-commit]": {
+        "editor.rulers": [
+            50,
+            72
+        ],
+        "rewrap.wrappingColumn": 72,
+    },
     "[css]": {
         "editor.tabSize": 2,
     },
