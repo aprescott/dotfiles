@@ -29,5 +29,5 @@ function untilsuccess() {
 }
 
 alias mrc="git log -1 --format=fuller"
-alias icat="kitten icat"
+alias icat="kitten icat --align left"
 alias rg="rg --hidden"
