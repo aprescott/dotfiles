@@ -16,6 +16,8 @@
 [core]
 	excludesfile = ~/.gitignore
 	pager = diff-so-fancy | less --tabs=4 -RFX
+[init]
+	defaultBranch = main
 [user]
 	name = aprescott
 	email = ash@aprescott.com
@@ -28,7 +30,10 @@
 [format]
 	pretty = fuller
 [alias]
+	a = add
 	st = status
+	c = commit
+	rb = rebase
 	detach = switch --detach
 	log-graph = log --graph --oneline --decorate --all
 	delete-merged-branches = !git branch --merged | grep -v '^\\*' | grep -v '\\bmaster\\b' | grep -v '\\bmain\\b' | sed -e 's/^ *//g' | tr '\\n' '\\0' | xargs -0 git branch -d
@@ -69,6 +74,7 @@
 	wip = "commit -m wip"
 	wipwip = "!git add . && git commit -m wip"
 	# new = "!newbranchfunc() { name="$*"; git switch -c aprescott/\"${name// /-}\"; }; newbranchfunc"
+	worktree-prune = "!git worktree list | cut -d ' ' -f 1 | grep -v -F \"$(git rev-parse --path-format=absolute --git-common-dir | xargs dirname)\" | xargs -r -I {} git worktree remove {}"
 [help]
 	autocorrect = 1
 [push]
