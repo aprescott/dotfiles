@@ -96,6 +96,7 @@ if $interactive_shell; then
 	if [ -f ~/.bash_ps1 ]; then
 		. ~/.bash_ps1
 	fi
+	export PROMPT_DIRTRIM=2
 	export PS1
 
 	# ostensibly: pick up .XCompose
