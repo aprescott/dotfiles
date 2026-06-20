@@ -4,6 +4,7 @@ from kitty.fast_data_types import Screen
 from kitty.tab_bar import (
     DrawData,
     ExtraData,
+    TabAccessor,
     TabBarData,
     as_rgb,
     draw_title,
@@ -33,6 +34,10 @@ def draw_tab(
     dot_filled_icon = "\uf444"
     dot_filled_circled_icon = "\uf192"
 
+    active_exe = TabAccessor(tab.tab_id).active_exe
+    shells = {'bash', 'zsh', 'fish', 'sh', 'dash', 'ksh', 'tcsh', 'csh'}
+    tab_has_process = active_exe and active_exe.lstrip('-') not in shells
+
     # For icons, see https://www.nerdfonts.com/cheat-sheet
     if tab.needs_attention and not tab.is_active:
         screen.draw(" " + bell_icon)
@@ -44,7 +49,8 @@ def draw_tab(
     elif tab.is_active:
         screen.draw(" " + dot_filled_circled_icon)
     else:
-        screen.draw(" " + dot_icon)
+        tab_icon = dot_filled_icon if tab_has_process else dot_icon
+        screen.draw(" " + tab_icon)
 
     draw_title(draw_data, screen, tab, index)
 
