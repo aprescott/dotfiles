@@ -46,7 +46,7 @@ command_style="${RESET_STYLE}"
 ERROR_STYLE="$RED_BOLD"
 
 PS1_GIT_BRANCH_COLOR_PART_1="${LIGHT_ORANGE}"
-PS1_GIT_BRANCH_COLOR_PART_2="${BOLD_ON}${LIGHT_ORANGE}"
+PS1_GIT_BRANCH_COLOR_PART_2="${LIGHT_ORANGE}"
 
 # we might not have git completion available, so squealch the missing
 # command error.
