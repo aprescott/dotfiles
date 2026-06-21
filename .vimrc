@@ -107,6 +107,8 @@ set foldnestmax=0
 set nofoldenable
 set foldlevel=1
 
+set formatoptions+=n
+
 " Prevent modelines as a security measure.
 set modelines=0
 set nomodeline
