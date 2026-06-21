@@ -1,0 +1,39 @@
+#!/bin/sh
+VIMSCRIPT=$(mktemp /tmp/fmt.XXXXXX.vim)
+cat > "$VIMSCRIPT" << 'EOF'
+set nocompatible
+set fo=tcqn
+set tw=72
+set autoindent
+set cpoptions=aABceFsz
+set comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+let &formatlistpat = '^\s*\d\+[\]:.)}\t ]\s*'
+
+normal! gg
+while line('.') < line('$')
+  normal! gqap
+  let prev = line('.')
+  normal! }
+  if line('.') == prev
+    normal! j
+  endif
+endwhile
+
+wq
+EOF
+
+run() {
+  vim -u NONE -es -S "$VIMSCRIPT" "$1"
+}
+
+if [ -n "$1" ]; then
+    run "$1"
+else
+    tmp=$(mktemp)
+    cat > "$tmp"
+    run "$tmp"
+    cat "$tmp"
+    rm "$tmp"
+fi
+
+rm "$VIMSCRIPT"
