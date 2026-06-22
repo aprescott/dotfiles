@@ -39,15 +39,15 @@ def draw_tab(
     tab_has_process = active_exe and active_exe.lstrip('-') not in shells
 
     # For icons, see https://www.nerdfonts.com/cheat-sheet
-    if tab.needs_attention and not tab.is_active:
-        screen.draw(" " + bell_icon)
-    elif tab.has_activity_since_last_focus and not tab.is_active:
+    if tab.is_active:
+        screen.draw(" " + dot_filled_circled_icon)
+    elif tab.has_activity_since_last_focus:
         # text_lines_icon isn't needed here since it's baked into
         # {activity_symbol} in the template in kitty.conf, and if we don't
         # include it in {activity_symbol}, it ends up in the wrong spot.
         screen.draw(" ")
-    elif tab.is_active:
-        screen.draw(" " + dot_filled_circled_icon)
+    elif tab.needs_attention:
+        screen.draw(" " + bell_icon)
     else:
         tab_icon = dot_filled_icon if tab_has_process else dot_icon
         screen.draw(" " + tab_icon)
