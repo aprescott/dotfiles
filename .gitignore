@@ -2,3 +2,5 @@
 
 /.vim/backups/*
 /.vim/.netrwhist
+
+/.emacs.d/backups/*
