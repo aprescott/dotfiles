@@ -1,4 +1,12 @@
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
+;; Store auto-save files in a central directory. The trailing `/` is important
+;; (https://emacs.stackexchange.com/a/17214).
+(setq auto-save-file-name-transforms
+      `((".*" "~/.emacs.d/auto-save-list/" t)))
+
+;; https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Locks.html#index-lock_002dfile_002dname_002dtransforms
+(setq lock-file-name-transforms
+      '(("\\`/.*/\\([^/]+\\)\\'" "~/.emacs.d/lock-files/\\1" t)))
 
 (setq inhibit-startup-screen t)
 (setq comment-empty-lines t)

@@ -15,7 +15,9 @@ find dotfiles -type f -maxdepth 1 |
 mkdir -p .vim
 cp -R dotfiles/.vim/{autoload,backups} .vim/
 
-mkdir -p .emacs.d
+mkdir -p .emacs.d/backups
+mkdir -p .emacs.d/auto-saves
+mkdir -p .emacs.d/lock-files
 ln -s dotfiles/.emacs.d/init.el .emacs.d/init.el
 ```
 
