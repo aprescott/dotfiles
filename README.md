@@ -31,6 +31,14 @@ find ../dotfiles/bin -type f -maxdepth 1 |
   xargs -L 1 -I {} ln -s {}
 ```
 
+Claude:
+
+```bash
+cd $HOME
+cd .claude
+ln -s ../dotfiles/claude/statusline-command.sh statusline-command.sh
+```
+
 kitty terminal config:
 
 ```shell
