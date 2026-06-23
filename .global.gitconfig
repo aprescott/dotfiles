@@ -15,7 +15,12 @@
 
 [core]
 	excludesfile = ~/.gitignore
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+	navigate = true  # use n and N to move between diff sections
+	dark = true      # or light = true, or omit for auto-detection
 [init]
 	defaultBranch = main
 [user]
@@ -82,6 +87,7 @@
 	autoSetupRemote = true
 [merge]
 	tool = vscode
+	conflictStyle = zdiff3
 [mergetool]
 	keepTemporaries = false
 	keepBackup = false
@@ -107,10 +113,3 @@
 	old = red
 	new = green
 	whitespace = red reverse
-[interactive]
-	diffFilter = diff-so-fancy --patch
-[diff-so-fancy]
-	stripLeadingSymbols = false # +/- markers
-	markEmptyLines = false
-	changeHunkIndicators = true
-	rulerWidth = 47 # default git header width
