@@ -2,35 +2,41 @@
 
 input=$(cat)
 
+RESET="\033[00m"
+GRAY="\033[0;90m"
+WHITE="\033[37m"
+
+GREEN="\033[38;5;34m"
+YELLOW="\033[38;5;178m"
+YELLOW_ORANGE="\033[38;5;208m"
+RED="\033[38;5;196m"
+
 # To debug and test, comment the below, then:
 #
 #   cat /tmp/claude-status.json | path/to/script.sh
 #
 
-# echo "$input" > /tmp/claude-status.json
+echo "$input" > /tmp/claude-status.json
 
 # Helper functions
 color_for_percent() {
   local pct=$1
-  if (( $(bc -l <<< "$pct < 50") )); then printf '\033[38;5;34m'
-  elif (( $(bc -l <<< "$pct < 70") )); then printf '\033[38;5;70m'
-  elif (( $(bc -l <<< "$pct < 85") )); then printf '\033[38;5;178m'
-  elif (( $(bc -l <<< "$pct < 95") )); then printf '\033[38;5;208m'
-  else printf '\033[38;5;196m'; fi
+  if (( $(bc -l <<< "$pct < 50") )); then printf "${GREEN}"
+  elif (( $(bc -l <<< "$pct < 70") )); then printf "${YELLOW}"
+  elif (( $(bc -l <<< "$pct < 85") )); then printf "${YELLOW_ORANGE}"
+  elif (( $(bc -l <<< "$pct < 95") )); then printf "${YELLOW_ORANGE}"
+  else printf "${RED}"; fi
 }
 
 color_for_delta() {
   local delta=$1
-  if (( $(bc -l <<< "$delta >= 20") )); then printf '\033[38;5;196m'
-  elif (( $(bc -l <<< "$delta >= 15") )); then printf '\033[38;5;208m'
-  elif (( $(bc -l <<< "$delta >= 10") )); then printf '\033[38;5;208m'
-  elif (( $(bc -l <<< "$delta >= 5") )); then printf '\033[38;5;178m'
-  elif (( $(bc -l <<< "$delta >= 0") )); then printf '\033[38;5;178m'
-  elif (( $(bc -l <<< "$delta >= -5") )); then printf '\033[38;5;178m'
-  elif (( $(bc -l <<< "$delta >= -10") )); then printf '\033[38;5;70m'
-  elif (( $(bc -l <<< "$delta >= -15") )); then printf '\033[38;5;70m'
-  elif (( $(bc -l <<< "$delta >= -20") )); then printf '\033[38;5;34m'
-  else printf '\033[38;5;34m'; fi
+  if (( $(bc -l <<< "$delta >= 20") )); then printf "${RED}"
+  elif (( $(bc -l <<< "$delta >= 15") )); then printf "${YELLOW_ORANGE}"
+  elif (( $(bc -l <<< "$delta >= 10") )); then printf "${YELLOW_ORANGE}"
+  elif (( $(bc -l <<< "$delta >= 5") )); then printf "${YELLOW}"
+  elif (( $(bc -l <<< "$delta >= 0") )); then printf "${YELLOW}"
+  elif (( $(bc -l <<< "$delta >= -5") )); then printf "${YELLOW}"
+  else printf "${GRAY}"; fi
 }
 
 right_align_array() {
@@ -83,9 +89,7 @@ seven_day_resets_at=$(echo "$input" | jq -r '.rate_limits.seven_day.resets_at //
 
 format_remaining_time() {
   local resets_at=$1
-  local max_day_width=$2
-  local max_part1_width=$3
-  local max_part2_width=$4
+  local max_last_width=$2
 
   local now_secs=$(date +%s)
   local remaining_secs=$((resets_at - now_secs))
@@ -100,17 +104,13 @@ format_remaining_time() {
   local minutes=$(((remaining_secs % 3600) / 60))
 
   if (( days > 0 )); then
-    days=$(pad_to_width "$days" "$max_day_width")
-    hours=$(pad_to_width "$hours" "$max_part2_width")
-    hours=$(ltrim_space "$hours")
+    hours=$(pad_to_width "$hours" "$max_last_width")
     echo "${days}d ${hours}h"
   elif (( hours > 0 )); then
-    hours=$(pad_to_width "$hours" "$max_part1_width")
-    minutes=$(pad_to_width "$minutes" "$max_part2_width")
-    minutes=$(ltrim_space "$minutes")
+    minutes=$(pad_to_width "$minutes" "$max_last_width")
     echo "${hours}h ${minutes}m"
   else
-    minutes=$(pad_to_width "$minutes" "$max_part2_width")
+    minutes=$(pad_to_width "$minutes" "$max_last_width")
     echo "${minutes}m"
   fi
 }
@@ -134,16 +134,25 @@ if (( rem_weekly > 0 )); then
   mins_weekly=$(((rem_weekly % 3600) / 60))
 fi
 
-# Find max widths
-max_day_width=${#days_5h}
-[[ ${#days_weekly} -gt $max_day_width ]] && max_day_width=${#days_weekly}
-max_part1_width=${#hours_5h}
-[[ ${#hours_weekly} -gt $max_part1_width ]] && max_part1_width=${#hours_weekly}
-max_part2_width=${#mins_5h}
-[[ ${#mins_weekly} -gt $max_part2_width ]] && max_part2_width=${#mins_weekly}
+# Find the rightmost numeric component for each time to align across format tiers.
+# "Xd Yh" format → last = Y (hours); "Xh Ym" or "Ym" format → last = Y or m (minutes).
+if (( rem_5h > 0 )); then
+  [[ $days_5h -gt 0 ]] && last_num_5h=$hours_5h || last_num_5h=$mins_5h
+else
+  last_num_5h=0
+fi
 
-five_hour_resets_at_fmt=$(format_remaining_time "$five_hour_resets_at" "$max_day_width" "$max_part1_width" "$max_part2_width")
-weekly_resets_at_fmt=$(format_remaining_time "$seven_day_resets_at" "$max_day_width" "$max_part1_width" "$max_part2_width")
+if (( rem_weekly > 0 )); then
+  [[ $days_weekly -gt 0 ]] && last_num_weekly=$hours_weekly || last_num_weekly=$mins_weekly
+else
+  last_num_weekly=0
+fi
+
+max_last_width=${#last_num_5h}
+[[ ${#last_num_weekly} -gt $max_last_width ]] && max_last_width=${#last_num_weekly}
+
+five_hour_resets_at_fmt=$(format_remaining_time "$five_hour_resets_at" "$max_last_width")
+weekly_resets_at_fmt=$(format_remaining_time "$seven_day_resets_at" "$max_last_width")
 
 # Right-align reset times
 reset_times=("$five_hour_resets_at_fmt" "$weekly_resets_at_fmt")
@@ -154,11 +163,6 @@ weekly_resets_at_fmt="${reset_times[1]}"
 worktree_name=$(echo "$input" | jq -r '.worktree.name // empty')
 worktree_branch=$(echo "$input" | jq -r '.worktree.branch // empty')
 worktree_original_branch=$(echo "$input" | jq -r '.worktree.original_branch // empty')
-
-RESET="\033[00m"
-GRAY="\033[0;90m"
-ORANGE="\033[38;5;215m"
-WHITE="\033[37m"
 
 # Given the remaining time until the 5-hour limit resets, calculate the expected
 # percentage of usage as if we had used a uniform amount over the entire window,
@@ -215,9 +219,16 @@ max_pct_len=${#pct_5h}
 pct_5h=$(pad_to_width "$pct_5h" "$max_pct_len")
 pct_weekly=$(pad_to_width "$pct_weekly" "$max_pct_len")
 
+# Format and pad expected percentages to same width
+expected_5h_fmt=$(format_number "$expected_5h_pct" 1)
+expected_weekly_fmt=$(format_number "$expected_weekly_pct" 1)
+max_expected_len=${#expected_5h_fmt}
+[[ ${#expected_weekly_fmt} -gt $max_expected_len ]] && max_expected_len=${#expected_weekly_fmt}
+expected_5h_fmt=$(pad_to_width "$expected_5h_fmt" "$max_expected_len")
+expected_weekly_fmt=$(pad_to_width "$expected_weekly_fmt" "$max_expected_len")
+
 if [ -n "$five_hour" ]; then
-  expected_fmt=$(format_number "$expected_5h_pct" 1)
-  line_5h="${WHITE}  5h${GRAY}  $(color_for_percent "$five_hour")${pct_5h}%${GRAY}  ${RESET}⟲ ${five_hour_resets_at_fmt}${GRAY}  (${expected_fmt}%, $(color_for_delta "$pct_delta_5h")${delta_str_5h}${GRAY})"
+  line_5h="${WHITE}  5h${GRAY}  $(color_for_percent "$five_hour")${pct_5h}%${GRAY}  ${RESET}⟲ ${five_hour_resets_at_fmt}${GRAY}  (${expected_5h_fmt}%, $(color_for_delta "$pct_delta_5h")${delta_str_5h}${GRAY})"
   if [ -n "$worktree_name" ]; then
     line_5h+="   ${GRAY}Worktree: ${worktree_name}${RESET}"
   fi
@@ -225,8 +236,7 @@ if [ -n "$five_hour" ]; then
 fi
 
 if [ -n "$seven_day" ]; then
-  expected_fmt=$(format_number "$expected_weekly_pct" 1)
-  line_weekly="${WHITE}Week${GRAY}  $(color_for_percent "$seven_day")${pct_weekly}%${GRAY}  ${RESET}⟲ ${weekly_resets_at_fmt}${GRAY}  (${expected_fmt}%, $(color_for_delta "$pct_delta_weekly")${delta_str_weekly}${GRAY})"
+  line_weekly="${WHITE}Week${GRAY}  $(color_for_percent "$seven_day")${pct_weekly}%${GRAY}  ${RESET}⟲ ${weekly_resets_at_fmt}${GRAY}  (${expected_weekly_fmt}%, $(color_for_delta "$pct_delta_weekly")${delta_str_weekly}${GRAY})"
   if [ -n "$worktree_branch" ]; then
     line_weekly+="   ${GRAY}Branch:   ${worktree_branch}"
     if [ -n "$worktree_original_branch" ]; then
@@ -243,16 +253,18 @@ separator="${GRAY} · ${RESET}"
 # Build top line: model, context, effort
 top_parts=()
 if [ -n "$model" ]; then
-  top_parts+=("${GRAY}${model}${RESET}")
+  model_str="${GRAY}${model}${RESET}"
+
+  if [ -n "$effort" ]; then
+    model_str+=" ${GRAY}(${RESET}${effort}${GRAY})${RESET}"
+  fi
+
+  top_parts+=("$model_str")
 fi
 
 if [ -n "$ctx_used" ]; then
   pct=$(format_number "$ctx_used" 1)
   top_parts+=("${GRAY}Context $(color_for_percent "$ctx_used")${pct}%${RESET}")
-fi
-
-if [ -n "$effort" ]; then
-  top_parts+=("${GRAY}(${effort})${RESET}")
 fi
 
 for part in "${top_parts[@]}"; do
