@@ -207,10 +207,17 @@ delta_str_weekly="${sign_weekly} ${numeric_weekly}%"
 
 parts=()
 
+# Calculate and pad percentages to same width
+pct_5h=$(format_number "$five_hour" 0)
+pct_weekly=$(format_number "$seven_day" 0)
+max_pct_len=${#pct_5h}
+[[ ${#pct_weekly} -gt $max_pct_len ]] && max_pct_len=${#pct_weekly}
+pct_5h=$(pad_to_width "$pct_5h" "$max_pct_len")
+pct_weekly=$(pad_to_width "$pct_weekly" "$max_pct_len")
+
 if [ -n "$five_hour" ]; then
-  pct=$(format_number "$five_hour" 0)
   expected_fmt=$(format_number "$expected_5h_pct" 1)
-  line_5h="${WHITE}  5h${GRAY}  $(color_for_percent "$five_hour")${pct}%${GRAY}  ${RESET}⟲ ${five_hour_resets_at_fmt}${GRAY}  (${expected_fmt}%, $(color_for_delta "$pct_delta_5h")${delta_str_5h}${GRAY})"
+  line_5h="${WHITE}  5h${GRAY}  $(color_for_percent "$five_hour")${pct_5h}%${GRAY}  ${RESET}⟲ ${five_hour_resets_at_fmt}${GRAY}  (${expected_fmt}%, $(color_for_delta "$pct_delta_5h")${delta_str_5h}${GRAY})"
   if [ -n "$worktree_name" ]; then
     line_5h+="   ${GRAY}Worktree: ${worktree_name}${RESET}"
   fi
@@ -218,9 +225,8 @@ if [ -n "$five_hour" ]; then
 fi
 
 if [ -n "$seven_day" ]; then
-  pct=$(format_number "$seven_day" 0)
   expected_fmt=$(format_number "$expected_weekly_pct" 1)
-  line_weekly="${WHITE}Week${GRAY}  $(color_for_percent "$seven_day")${pct}%${GRAY}  ${RESET}⟲ ${weekly_resets_at_fmt}${GRAY}  (${expected_fmt}%, $(color_for_delta "$pct_delta_weekly")${delta_str_weekly}${GRAY})"
+  line_weekly="${WHITE}Week${GRAY}  $(color_for_percent "$seven_day")${pct_weekly}%${GRAY}  ${RESET}⟲ ${weekly_resets_at_fmt}${GRAY}  (${expected_fmt}%, $(color_for_delta "$pct_delta_weekly")${delta_str_weekly}${GRAY})"
   if [ -n "$worktree_branch" ]; then
     line_weekly+="   ${GRAY}Branch:   ${worktree_branch}"
     if [ -n "$worktree_original_branch" ]; then
