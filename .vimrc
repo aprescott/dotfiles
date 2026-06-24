@@ -5,6 +5,9 @@ set nocompatible
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
+set selection=exclusive
+set clipboard^=unnamed
+
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
