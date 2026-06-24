@@ -48,17 +48,21 @@ test_case "Example 4: 4h 59m / 5d 10h" \
   $((4 * 3600 + 59 * 60)) \
   $((5 * 86400 + 10 * 3600))
 
-test_case "Example 5: 1m / 2d 10h" \
+test_case "Example 5: 3h 12m / 5d 19h (b.e. both: 30m / 5h 25m)" \
+  $((3 * 3600 + 12 * 60)) \
+  $((5 * 86400 + 19 * 3600 + 49 * 60))
+
+test_case "Example 6: 1m / 2d 10h" \
   $((1 * 60)) \
   $((2 * 86400 + 10 * 3600))
 
-# Example 6: test 100% used (window just reset or is resetting)
+# Example 7: test 100% used (window just reset or is resetting)
 now=$(date +%s)
 five_h_reset=$now
 weekly_reset=$now
 
 echo "========================================"
-echo "Example 6: 0m / 0m (100% used, at reset)"
+echo "Example 7: 0m / 0m (100% used, at reset)"
 echo "========================================"
 cat <<EOF | "$(dirname "$0")/statusline-command.sh" | sed 's/\x1b\[[0-9;]*m//g'
 {
@@ -74,13 +78,13 @@ cat <<EOF | "$(dirname "$0")/statusline-command.sh" | sed 's/\x1b\[[0-9;]*m//g'
 EOF
 echo ""
 
-# Example 7: test 0% used but 100% predicted (window just reset)
+# Example 8: test 0% used but 100% predicted (window just reset)
 now=$(date +%s)
 five_h_reset=$now
 weekly_reset=$now
 
 echo "========================================"
-echo "Example 7: 0m / 0m (0% used, 100% expected)"
+echo "Example 8: 0m / 0m (0% used, 100% expected)"
 echo "========================================"
 cat <<EOF | "$(dirname "$0")/statusline-command.sh" | sed 's/\x1b\[[0-9;]*m//g'
 {

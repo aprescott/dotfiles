@@ -87,32 +87,29 @@ seven_day=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // emp
 five_hour_resets_at=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
 seven_day_resets_at=$(echo "$input" | jq -r '.rate_limits.seven_day.resets_at // empty')
 
+format_duration_secs() {
+  local secs=$1 max_last_width=$2
+  local days=$(( secs / 86400 ))
+  local hours=$(( (secs % 86400) / 3600 ))
+  local minutes=$(( (secs % 3600) / 60 ))
+  if (( days > 0 )); then
+    echo "${days}d $(pad_to_width "$hours" "$max_last_width")h"
+  elif (( hours > 0 )); then
+    echo "${hours}h $(pad_to_width "$minutes" "$max_last_width")m"
+  else
+    echo "$(pad_to_width "$minutes" "$max_last_width")m"
+  fi
+}
+
 format_remaining_time() {
-  local resets_at=$1
-  local max_last_width=$2
-
+  local resets_at=$1 max_last_width=$2
   local now_secs=$(date +%s)
-  local remaining_secs=$((resets_at - now_secs))
-
+  local remaining_secs=$(( resets_at - now_secs ))
   if (( remaining_secs < 0 )); then
     echo "reset"
     return
   fi
-
-  local days=$((remaining_secs / 86400))
-  local hours=$(((remaining_secs % 86400) / 3600))
-  local minutes=$(((remaining_secs % 3600) / 60))
-
-  if (( days > 0 )); then
-    hours=$(pad_to_width "$hours" "$max_last_width")
-    echo "${days}d ${hours}h"
-  elif (( hours > 0 )); then
-    minutes=$(pad_to_width "$minutes" "$max_last_width")
-    echo "${hours}h ${minutes}m"
-  else
-    minutes=$(pad_to_width "$minutes" "$max_last_width")
-    echo "${minutes}m"
-  fi
+  format_duration_secs "$remaining_secs" "$max_last_width"
 }
 
 # Calculate component widths for both reset times
@@ -209,6 +206,65 @@ numeric_weekly=$(pad_to_width "$numeric_weekly" "$max_numeric_len")
 delta_str_5h="${sign_5h} ${numeric_5h}%"
 delta_str_weekly="${sign_weekly} ${numeric_weekly}%"
 
+# Break-even: seconds until expected_pct catches up to actual_pct (only meaningful when positive)
+be_5h_secs_raw=$(bc -l <<< "$five_hour_resets_at - 18000 * (100 - $five_hour) / 100 - $now_secs")
+be_weekly_secs_raw=$(bc -l <<< "$seven_day_resets_at - 604800 * (100 - $seven_day) / 100 - $now_secs")
+
+be_5h_secs=0
+(( $(bc -l <<< "$be_5h_secs_raw > 0") )) && be_5h_secs=${be_5h_secs_raw%.*}
+
+be_weekly_secs=0
+(( $(bc -l <<< "$be_weekly_secs_raw > 0") )) && be_weekly_secs=${be_weekly_secs_raw%.*}
+
+# Determine last numeric component of each b.e. duration for alignment
+if (( be_5h_secs > 0 )); then
+  be_5h_d=$(( be_5h_secs / 86400 ))
+  be_5h_h=$(( (be_5h_secs % 86400) / 3600 ))
+  be_5h_m=$(( (be_5h_secs % 3600) / 60 ))
+  [[ $be_5h_d -gt 0 ]] && last_be_5h=$be_5h_h || last_be_5h=$be_5h_m
+else
+  last_be_5h=0
+fi
+
+if (( be_weekly_secs > 0 )); then
+  be_wk_d=$(( be_weekly_secs / 86400 ))
+  be_wk_h=$(( (be_weekly_secs % 86400) / 3600 ))
+  be_wk_m=$(( (be_weekly_secs % 3600) / 60 ))
+  [[ $be_wk_d -gt 0 ]] && last_be_weekly=$be_wk_h || last_be_weekly=$be_wk_m
+else
+  last_be_weekly=0
+fi
+
+max_be_last_width=${#last_be_5h}
+[[ ${#last_be_weekly} -gt $max_be_last_width ]] && max_be_last_width=${#last_be_weekly}
+
+be_5h_dur=""
+(( be_5h_secs > 0 )) && be_5h_dur=$(format_duration_secs "$be_5h_secs" "$max_be_last_width")
+
+be_weekly_dur=""
+(( be_weekly_secs > 0 )) && be_weekly_dur=$(format_duration_secs "$be_weekly_secs" "$max_be_last_width")
+
+if [ -n "$be_5h_dur" ] && [ -n "$be_weekly_dur" ]; then
+  be_durs=("$be_5h_dur" "$be_weekly_dur")
+  right_align_array be_durs
+  be_5h_dur="${be_durs[0]}"
+  be_weekly_dur="${be_durs[1]}"
+fi
+
+be_5h_suffix=""
+[ -n "$be_5h_dur" ] && be_5h_suffix=", b.e. ${be_5h_dur}"
+
+be_weekly_suffix=""
+[ -n "$be_weekly_dur" ] && be_weekly_suffix=", b.e. ${be_weekly_dur}"
+
+# When only one line has a b.e., pad the other so the worktree/branch column stays aligned.
+be_5h_pad="" be_weekly_pad=""
+if [ -n "$be_5h_suffix" ] && [ -z "$be_weekly_suffix" ]; then
+  be_weekly_pad=$(printf '%*s' "${#be_5h_suffix}" "")
+elif [ -z "$be_5h_suffix" ] && [ -n "$be_weekly_suffix" ]; then
+  be_5h_pad=$(printf '%*s' "${#be_weekly_suffix}" "")
+fi
+
 parts=()
 
 # Calculate and pad percentages to same width
@@ -228,7 +284,7 @@ expected_5h_fmt=$(pad_to_width "$expected_5h_fmt" "$max_expected_len")
 expected_weekly_fmt=$(pad_to_width "$expected_weekly_fmt" "$max_expected_len")
 
 if [ -n "$five_hour" ]; then
-  line_5h="${WHITE}  5h${GRAY}  $(color_for_percent "$five_hour")${pct_5h}%${GRAY}  ${RESET}⟲ ${five_hour_resets_at_fmt}${GRAY}  (${expected_5h_fmt}%, $(color_for_delta "$pct_delta_5h")${delta_str_5h}${GRAY})"
+  line_5h="${WHITE}  5h${GRAY}  $(color_for_percent "$five_hour")${pct_5h}%${RESET}  ${GRAY}⟲${RESET} ${five_hour_resets_at_fmt}${GRAY}  ${expected_5h_fmt}%, $(color_for_delta "$pct_delta_5h")${delta_str_5h}${GRAY}${be_5h_suffix}${be_5h_pad}"
   if [ -n "$worktree_name" ]; then
     line_5h+="   ${GRAY}Worktree: ${worktree_name}${RESET}"
   fi
@@ -236,7 +292,7 @@ if [ -n "$five_hour" ]; then
 fi
 
 if [ -n "$seven_day" ]; then
-  line_weekly="${WHITE}Week${GRAY}  $(color_for_percent "$seven_day")${pct_weekly}%${GRAY}  ${RESET}⟲ ${weekly_resets_at_fmt}${GRAY}  (${expected_weekly_fmt}%, $(color_for_delta "$pct_delta_weekly")${delta_str_weekly}${GRAY})"
+  line_weekly="${WHITE}Week${GRAY}  $(color_for_percent "$seven_day")${pct_weekly}%${RESET}  ${GRAY}⟲${RESET} ${weekly_resets_at_fmt}${GRAY}  ${expected_weekly_fmt}%, $(color_for_delta "$pct_delta_weekly")${delta_str_weekly}${GRAY}${be_weekly_suffix}${be_weekly_pad}"
   if [ -n "$worktree_branch" ]; then
     line_weekly+="   ${GRAY}Branch:   ${worktree_branch}"
     if [ -n "$worktree_original_branch" ]; then
