@@ -110,7 +110,10 @@ if $interactive_shell; then
 	fi
 fi # end interactive-specifics
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if command -v fzf > /dev/null; then
+	# Set up fzf key bindings and fuzzy completion
+	eval "$(fzf --bash)"
+fi
 
 export FX_THEME=3
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
