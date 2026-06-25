@@ -21,7 +21,7 @@ echo "$input" > /tmp/claude-status.json
 # Helper functions
 color_for_percent() {
   local pct=$1
-  if (( $(bc -l <<< "$pct < 50") )); then printf "${GREEN}"
+  if (( $(bc -l <<< "$pct < 50") )); then printf "${GRAY}"
   elif (( $(bc -l <<< "$pct < 70") )); then printf "${YELLOW}"
   elif (( $(bc -l <<< "$pct < 85") )); then printf "${YELLOW_ORANGE}"
   elif (( $(bc -l <<< "$pct < 95") )); then printf "${YELLOW_ORANGE}"
