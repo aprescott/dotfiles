@@ -26,8 +26,10 @@ autoload -U backward-kill-word-match
 # determine what a word is, which we're going to set to `shell`.
 zle -N my-backward-kill-shell-word backward-kill-word-match
 zstyle ':zle:my-backward-kill-shell-word' word-style shell
-# Now bind alt-backspace to the alias.
-bindkey '^[^?' my-backward-kill-shell-word
+# Bind alt-backspace to the standard C-w.
+bindkey '^[^?' backward-kill-word
+# Bind C-w to the alias.
+bindkey '^W' my-backward-kill-shell-word
 
 # Make path unique to avoid duplicates. Note zsh links $path (array) with $PATH
 # (string).
