@@ -206,64 +206,57 @@ numeric_weekly=$(pad_to_width "$numeric_weekly" "$max_numeric_len")
 delta_str_5h="${sign_5h} ${numeric_5h}%"
 delta_str_weekly="${sign_weekly} ${numeric_weekly}%"
 
-# Break-even: seconds until expected_pct catches up to actual_pct (only meaningful when positive)
+# Break-even: seconds until the window catches up to actual usage.
+# Positive = over budget (hits 100% before reset); negative = under budget.
 be_5h_secs_raw=$(bc -l <<< "$five_hour_resets_at - 18000 * (100 - $five_hour) / 100 - $now_secs")
 be_weekly_secs_raw=$(bc -l <<< "$seven_day_resets_at - 604800 * (100 - $seven_day) / 100 - $now_secs")
 
-be_5h_secs=0
-(( $(bc -l <<< "$be_5h_secs_raw > 0") )) && be_5h_secs=${be_5h_secs_raw%.*}
+if (( $(bc -l <<< "$be_5h_secs_raw >= 0") )); then
+  be_5h_sign="+"
+  be_5h_secs=${be_5h_secs_raw%.*}
+else
+  be_5h_sign="-"
+  abs="${be_5h_secs_raw#-}"
+  be_5h_secs=${abs%.*}
+  be_5h_secs=${be_5h_secs:-0}
+fi
 
-be_weekly_secs=0
-(( $(bc -l <<< "$be_weekly_secs_raw > 0") )) && be_weekly_secs=${be_weekly_secs_raw%.*}
+if (( $(bc -l <<< "$be_weekly_secs_raw >= 0") )); then
+  be_weekly_sign="+"
+  be_weekly_secs=${be_weekly_secs_raw%.*}
+else
+  be_weekly_sign="-"
+  abs="${be_weekly_secs_raw#-}"
+  be_weekly_secs=${abs%.*}
+  be_weekly_secs=${be_weekly_secs:-0}
+fi
 
 # Determine last numeric component of each b.e. duration for alignment
-if (( be_5h_secs > 0 )); then
-  be_5h_d=$(( be_5h_secs / 86400 ))
-  be_5h_h=$(( (be_5h_secs % 86400) / 3600 ))
-  be_5h_m=$(( (be_5h_secs % 3600) / 60 ))
-  [[ $be_5h_d -gt 0 ]] && last_be_5h=$be_5h_h || last_be_5h=$be_5h_m
-else
-  last_be_5h=0
-fi
+be_5h_d=$(( be_5h_secs / 86400 ))
+be_5h_h=$(( (be_5h_secs % 86400) / 3600 ))
+be_5h_m=$(( (be_5h_secs % 3600) / 60 ))
+[[ $be_5h_d -gt 0 ]] && last_be_5h=$be_5h_h || last_be_5h=$be_5h_m
 
-if (( be_weekly_secs > 0 )); then
-  be_wk_d=$(( be_weekly_secs / 86400 ))
-  be_wk_h=$(( (be_weekly_secs % 86400) / 3600 ))
-  be_wk_m=$(( (be_weekly_secs % 3600) / 60 ))
-  [[ $be_wk_d -gt 0 ]] && last_be_weekly=$be_wk_h || last_be_weekly=$be_wk_m
-else
-  last_be_weekly=0
-fi
+be_wk_d=$(( be_weekly_secs / 86400 ))
+be_wk_h=$(( (be_weekly_secs % 86400) / 3600 ))
+be_wk_m=$(( (be_weekly_secs % 3600) / 60 ))
+[[ $be_wk_d -gt 0 ]] && last_be_weekly=$be_wk_h || last_be_weekly=$be_wk_m
 
 max_be_last_width=${#last_be_5h}
 [[ ${#last_be_weekly} -gt $max_be_last_width ]] && max_be_last_width=${#last_be_weekly}
 
-be_5h_dur=""
-(( be_5h_secs > 0 )) && be_5h_dur=$(format_duration_secs "$be_5h_secs" "$max_be_last_width")
+be_5h_dur=$(format_duration_secs "$be_5h_secs" "$max_be_last_width")
+be_weekly_dur=$(format_duration_secs "$be_weekly_secs" "$max_be_last_width")
 
-be_weekly_dur=""
-(( be_weekly_secs > 0 )) && be_weekly_dur=$(format_duration_secs "$be_weekly_secs" "$max_be_last_width")
+be_durs=("$be_5h_dur" "$be_weekly_dur")
+right_align_array be_durs
+be_5h_dur="${be_durs[0]}"
+be_weekly_dur="${be_durs[1]}"
 
-if [ -n "$be_5h_dur" ] && [ -n "$be_weekly_dur" ]; then
-  be_durs=("$be_5h_dur" "$be_weekly_dur")
-  right_align_array be_durs
-  be_5h_dur="${be_durs[0]}"
-  be_weekly_dur="${be_durs[1]}"
-fi
+be_5h_suffix=", b.e. ${be_5h_sign} ${be_5h_dur}"
+be_weekly_suffix=", b.e. ${be_weekly_sign} ${be_weekly_dur}"
 
-be_5h_suffix=""
-[ -n "$be_5h_dur" ] && be_5h_suffix=", b.e. ${be_5h_dur}"
-
-be_weekly_suffix=""
-[ -n "$be_weekly_dur" ] && be_weekly_suffix=", b.e. ${be_weekly_dur}"
-
-# When only one line has a b.e., pad the other so the worktree/branch column stays aligned.
 be_5h_pad="" be_weekly_pad=""
-if [ -n "$be_5h_suffix" ] && [ -z "$be_weekly_suffix" ]; then
-  be_weekly_pad=$(printf '%*s' "${#be_5h_suffix}" "")
-elif [ -z "$be_5h_suffix" ] && [ -n "$be_weekly_suffix" ]; then
-  be_5h_pad=$(printf '%*s' "${#be_weekly_suffix}" "")
-fi
 
 parts=()
 
