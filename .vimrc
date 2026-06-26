@@ -15,6 +15,9 @@ set scrolloff=5
 set cursorline
 highlight CursorLine cterm=NONE guibg=#22262e
 
+highlight ExtraWhitespace ctermbg=red guibg=#5f2930
+match ExtraWhitespace /\s\+$/
+
 set colorcolumn=80
 
 if has("vms")
