@@ -79,11 +79,24 @@ function prompt_git_branch_part() {
   fi
 }
 
+# https://sw.kovidgoyal.net/kitty/text-sizing-protocol/
+KITTY_TEXT_SIZING="%{${ESC}]66;n=3:d=4:h=1:v=2;%}"
+KITTY_TEXT_SIZING_END="%{${ESC}"$'\a'"%}"
+
 # If 5+ parts, show the first part, then ellipsis, then the last 3.
 #
 # https://unix.stackexchange.com/questions/273529/shorten-path-in-zsh-prompt
 #
 PROMPT_DIR_PATH="%(5~|%-1~/…/%3~|%4~)"
-PROMPT="${PROMPT_STYLE}${PROMPT_DIR_PATH}"
+#PROMPT_TERMINATOR="$"
+PROMPT_TERMINATOR="❯"
+PROMPT_TERMINATOR="${KITTY_TEXT_SIZING}${PROMPT_TERMINATOR}${KITTY_TEXT_SIZING_END}"
+
+function precmd() {
+  export LAST_EXIT_CODE=$?
+}
+
+PROMPT=""
+PROMPT="${PROMPT}${PROMPT_STYLE}${PROMPT_DIR_PATH}"
 PROMPT="${PROMPT}${PROMPT_GIT_BRANCH_COLOR_PART_1}\$(prompt_git_branch_part 1)${PROMPT_GIT_BRANCH_COLOR_PART_2}\$(prompt_git_branch_part 2)"
-PROMPT="${PROMPT}${PROMPT_STYLE}\$(if [ \$? -gt 0 ]; then echo -e '$ERROR_STYLE'; fi)\$ $RESET_STYLE"
+PROMPT="${PROMPT}${PROMPT_STYLE}\$(if [ \$LAST_EXIT_CODE -gt 0 ]; then echo -e '$ERROR_STYLE'; fi)${PROMPT_TERMINATOR}$RESET_STYLE "
