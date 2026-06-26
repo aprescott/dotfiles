@@ -88,6 +88,7 @@ if command -v fzf > /dev/null; then
 fi
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+bindkey '^ ' autosuggest-accept
 
 # For completion system docs, see
 #
