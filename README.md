@@ -12,8 +12,10 @@ find dotfiles -type f -maxdepth 1 |
   grep -v .global.gitconfig |
   xargs -L 1 -I {} ln -f -s {}
 
-mkdir -p .vim
-cp -R dotfiles/.vim/{autoload,backups} .vim/
+mkdir -p .vim/{backups,swapfiles}
+
+mkdir -p .config/nvim/
+ln -s dotfiles/nvim/init.lua .config/nvim/init.lua
 
 mkdir -p .emacs.d/backups
 mkdir -p .emacs.d/auto-saves

@@ -8,15 +8,34 @@ set backspace=indent,eol,start
 set selection=exclusive
 set clipboard^=unnamed
 
+set virtualedit=onemore
+set scrolloff=5
+
+" set termguicolors
+set cursorline
+highlight CursorLine cterm=NONE guibg=#22262e
+
+set colorcolumn=80
+
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+  " do not keep a backup file, use versions instead
+  set nobackup
 else
-  set backup		" keep a backup file
+  " keep a backup file
+  set backup
 endif
-set history=100		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+
+" keep 50 lines of command line history
+set history=100
+
+" show the cursor position all the time
+set ruler
+
+" display incomplete commands
+set showcmd
+
+" do incremental searching
+set incsearch
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -83,45 +102,56 @@ set shiftwidth=2
 set expandtab
 set number
 
-nmap <F2> :set nonumber! number?<CR>
+set timeoutlen=100
+set ttimeoutlen=50
 
-nmap j gj
-nmap k gk
-nmap <Down> gj
-nmap <Up> gk
-nmap 0 g0
-nmap $ g$
-nmap ^ g^
-nmap <End> g$
-nmap <Home> g^
+set ignorecase
+set smartcase
 
-vmap j gj
-vmap k gk
-vmap <Down> gj
-vmap <Up> gk
-vmap 0 g0
-vmap $ g$
-vmap ^ g^
-vmap <End> g$
-vmap <Home> g^
+nnoremap <F2> :set nonumber! number?<CR>
+
+nnoremap j gj
+nnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
+nnoremap 0 g0
+nnoremap $ g$
+nnoremap ^ g^
+nnoremap <End> g$
+nnoremap <Home> g^
+
+inoremap <C-a> <C-o>g^
+cnoremap <C-a> <Home>
+inoremap <C-e> <C-o>g$
+cnoremap <C-e> <End>
+inoremap <C-w> <C-g>u<C-w>
+
+vnoremap j gj
+vnoremap k gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+vnoremap 0 g0
+vnoremap $ g$
+vnoremap ^ g^
+vnoremap <End> g$
+vnoremap <Home> g^
+
+vnoremap < <gv
+vnoremap > >gv
 
 set foldmethod=indent
 set foldnestmax=0
 set nofoldenable
 set foldlevel=1
 
+" Better numbered list handling for gq wrapping.
 set formatoptions+=n
 
 " Prevent modelines as a security measure.
 set modelines=0
 set nomodeline
 
-set directory=.,~/vim/backups,~/tmp,/tmp
-set backupdir=~/.vim/backups,.,~/tmp,/tmp
+set directory=~/.vim/swapfiles//
+set backupdir=~/.vim/backups//
 
-call pathogen#infect()
-
-" Force the light background syntax color scheme
-" even when we're on a dark scheme (since it's more
-" muted).
-set background=light
+set background=dark
