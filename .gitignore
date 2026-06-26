@@ -4,3 +4,6 @@
 /.vim/.netrwhist
 
 /.emacs.d/backups/*
+
+/nvim/pack/
+/nvim/lazy-lock.json

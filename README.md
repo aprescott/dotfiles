@@ -14,13 +14,12 @@ find dotfiles -type f -maxdepth 1 |
 
 mkdir -p .vim/{backups,swapfiles}
 
-mkdir -p .config/nvim/
-ln -s dotfiles/nvim/init.lua .config/nvim/init.lua
+ln -s ../dotfiles/nvim .config/nvim
 
 mkdir -p .emacs.d/backups
 mkdir -p .emacs.d/auto-saves
 mkdir -p .emacs.d/lock-files
-ln -s dotfiles/.emacs.d/init.el .emacs.d/init.el
+ln -s ../dotfiles/.emacs.d/init.el .emacs.d/init.el
 ```
 
 `bin/` files:
