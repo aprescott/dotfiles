@@ -123,6 +123,20 @@ nnoremap ^ g^
 nnoremap <End> g$
 nnoremap <Home> g^
 
+
+" With thanks to https://gitlab.com/pacholik1/dotfiles/-/blob/e36c845269903302f777b378781bee792971deb0/.config/nvim/plugin/zero.vim
+
+function! s:ExtendedHome() abort
+  let column = col('.')
+  normal! ^
+  if column == col('.')
+    normal! 0
+  endif
+endfunction
+
+nnoremap <silent> 0 <Cmd>call <SID>ExtendedHome()<CR>
+
+
 inoremap <C-a> <C-o>g^
 cnoremap <C-a> <Home>
 inoremap <C-e> <C-o>g$
