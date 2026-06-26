@@ -5,6 +5,11 @@ HISTSIZE=10000
 # history file
 SAVEHIST=10000
 
+WORDCHARS="${WORDCHARS/\/}"
+WORDCHARS="${WORDCHARS/-}"
+WORDCHARS="${WORDCHARS/_}"
+WORDCHARS="${WORDCHARS/:}"
+
 # emacs bindings
 bindkey -e
 
@@ -14,6 +19,15 @@ bindkey '^[[Z' reverse-menu-complete
 # Alt-Left and Alt-Right.
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
+
+# Make backward-kill-word-match available.
+autoload -U backward-kill-word-match
+# Alias backward-kill-word-match, which uses the `word-style` zstyle to
+# determine what a word is, which we're going to set to `shell`.
+zle -N my-backward-kill-shell-word backward-kill-word-match
+zstyle ':zle:my-backward-kill-shell-word' word-style shell
+# Now bind alt-backspace to the alias.
+bindkey '^[^?' my-backward-kill-shell-word
 
 # Make path unique to avoid duplicates. Note zsh links $path (array) with $PATH
 # (string).
