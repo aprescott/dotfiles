@@ -165,8 +165,8 @@ zstyle ':completion:*' matcher-list \
   '+r:|[._-]=* r:|=*'
 
 # Maximum number of errors for a completer.
-zstyle ':completion:*' max-errors 2
-
+# No correction for short inputs (< 4 chars) to avoid false matches.
+zstyle -e ':completion:*' max-errors 'reply=( $(( ${#${PREFIX##*/}} >= 4 ? 2 : 0 )) numeric )'
 # Menu completion, with cursor key navigation always enabled.
 zstyle ':completion:*' menu select=1
 
