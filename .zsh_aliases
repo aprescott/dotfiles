@@ -1,3 +1,6 @@
+alias vim="nvim"
+
+alias c="bat"
 alias ls='ls -lap -h'
 alias l='ls -lap -h'
 alias histoff="unset HISTFILE"

@@ -1,39 +1,209 @@
 return {
   {
+    'projekt0n/github-nvim-theme',
+    name = 'github-theme',
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require('github-theme').setup({
+        -- ...
+      })
+
+      vim.cmd('colorscheme github_dark_default')
+    end,
+  },
+
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      options = {
+        offsets = {
+          {
+            filetype = "neo-tree",
+            text = "Files",
+            highlight = "Directory",
+            separator = true,
+          },
+        },
+      },
+    },
+  },
+
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons", -- optional, but recommended
+    },
+    lazy = false, -- neo-tree will lazily load itself
+    opts = {
+      window = {
+        position = "float",
+      },
+      filesystem = {
+        filtered_items = {
+          visible = true,
+        },
+      },
+    },
+  },
+
+  {
     'nvim-treesitter/nvim-treesitter',
     lazy = false,
     build = ':TSUpdate'
   },
 
+  { "lukas-reineke/virt-column.nvim", opts = {} },
+  { "github/copilot.vim" },
   {
-    "folke/noice.nvim",
-    event = "VeryLazy",
+    "jake-stewart/multicursor.nvim",
+    branch = "1.0",
+    config = function()
+      local mc = require("multicursor-nvim")
+      mc.setup()
+
+      local set = vim.keymap.set
+
+      -- Add a cursor to every search result in the buffer.
+      set({"n", "x"}, "<D-d>", function() mc.matchAddCursor(1) end)
+      set({"n", "x"}, "<D-u>", function() mc.matchAddCursor(-1) end)
+
+      -- Append/insert for each line of visual selections.
+      -- Similar to block selection insertion.
+      set("x", "<D-S-L>", mc.appendVisual)
+
+      -- Mappings defined in a keymap layer only apply when there are
+      -- multiple cursors. This lets you have overlapping mappings.
+      mc.addKeymapLayer(function(layerSet)
+        -- Enable and clear cursors using escape.
+        layerSet("n", "<esc>", function()
+          if not mc.cursorsEnabled() then
+            mc.enableCursors()
+          else
+            mc.clearCursors()
+          end
+        end)
+      end)
+
+      -- Customize how cursors look.
+      local hl = vim.api.nvim_set_hl
+      hl(0, "MultiCursorCursor", { reverse = true })
+      hl(0, "MultiCursorVisual", { link = "Visual" })
+      hl(0, "MultiCursorSign", { link = "SignColumn"})
+      hl(0, "MultiCursorMatchPreview", { link = "Search" })
+      hl(0, "MultiCursorDisabledCursor", { reverse = true })
+      hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
+      hl(0, "MultiCursorDisabledSign", { link = "SignColumn"})
+    end
+  },
+
+  {
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    -- or if using mini.icons/mini.nvim
+    -- dependencies = { "nvim-mini/mini.icons" },
+    ---@module "fzf-lua"
+    ---@type fzf-lua.Config|{}
+    ---@diagnostic disable: missing-fields
     opts = {
-      -- add any options here
-      presets = {
-        command_palette = true,
+      files = {
+        git_icons = true,
       },
-      views = {
-        cmdline_popup = {
-          border = {
-            style = "none",
-            padding = { 1, 2 },
-          },
-          filter_options = {},
-          win_options = {
-            winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-          },
+      grep = {
+        fzf_opts = {
+          ["--nth"] = "3..",
         },
-      }
+      },
     },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
+    ---@diagnostic enable: missing-fields
+    keys = {
+      { "<C-k>",  "<cmd>FzfLua builtin<cr>" },
+      { "<D-p>",  "<cmd>FzfLua files<cr>" },
+      { "<C-\\>", "<cmd>FzfLua buffers<cr>" },
+      { "<D-r>",  "<cmd>FzfLua grep_project<cr>" },
+    },
+  },
+
+  {
+    "folke/which-key.nvim",
+    enabled = false,
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
+  },
+  { "lewis6991/gitsigns.nvim" },
+  { "neovim/nvim-lspconfig" },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
     }
+  },
+
+  ---@module "neominimap.config.meta"
+  {
+    "Isrothy/neominimap.nvim",
+    version = "v3.x.x",
+    lazy = false, -- NOTE: NO NEED to Lazy load
+    -- Optional. You can also set your own keybindings
+    keys = {
+      -- Global Minimap Controls
+      -- { "<leader>nm", "<cmd>Neominimap Toggle<cr>", desc = "Toggle global minimap" },
+      -- { "<leader>no", "<cmd>Neominimap Enable<cr>", desc = "Enable global minimap" },
+      -- { "<leader>nc", "<cmd>Neominimap Disable<cr>", desc = "Disable global minimap" },
+      -- { "<leader>nr", "<cmd>Neominimap Refresh<cr>", desc = "Refresh global minimap" },
+
+      -- Window-Specific Minimap Controls
+      -- { "<leader>nwt", "<cmd>Neominimap WinToggle<cr>", desc = "Toggle minimap for current window" },
+      -- { "<leader>nwr", "<cmd>Neominimap WinRefresh<cr>", desc = "Refresh minimap for current window" },
+      -- { "<leader>nwo", "<cmd>Neominimap WinEnable<cr>", desc = "Enable minimap for current window" },
+      -- { "<leader>nwc", "<cmd>Neominimap WinDisable<cr>", desc = "Disable minimap for current window" },
+
+      -- Tab-Specific Minimap Controls
+      -- { "<leader>ntt", "<cmd>Neominimap TabToggle<cr>", desc = "Toggle minimap for current tab" },
+      -- { "<leader>ntr", "<cmd>Neominimap TabRefresh<cr>", desc = "Refresh minimap for current tab" },
+      -- { "<leader>nto", "<cmd>Neominimap TabEnable<cr>", desc = "Enable minimap for current tab" },
+      -- { "<leader>ntc", "<cmd>Neominimap TabDisable<cr>", desc = "Disable minimap for current tab" },
+
+      -- Buffer-Specific Minimap Controls
+      -- { "<leader>nbt", "<cmd>Neominimap BufToggle<cr>", desc = "Toggle minimap for current buffer" },
+      -- { "<leader>nbr", "<cmd>Neominimap BufRefresh<cr>", desc = "Refresh minimap for current buffer" },
+      -- { "<leader>nbo", "<cmd>Neominimap BufEnable<cr>", desc = "Enable minimap for current buffer" },
+      -- { "<leader>nbc", "<cmd>Neominimap BufDisable<cr>", desc = "Disable minimap for current buffer" },
+
+      ---Focus Controls
+      -- { "<leader>nf", "<cmd>Neominimap Focus<cr>", desc = "Focus on minimap" },
+      -- { "<leader>nu", "<cmd>Neominimap Unfocus<cr>", desc = "Unfocus minimap" },
+      -- { "<leader>ns", "<cmd>Neominimap ToggleFocus<cr>", desc = "Switch focus on minimap" },
+    },
+    init = function()
+      -- The following options are recommended when layout == "float"
+      vim.opt.wrap = false
+      vim.opt.sidescrolloff = 36 -- Set a large value
+
+      --- Put your configuration here
+      ---@type Neominimap.UserConfig
+      vim.g.neominimap = {
+        auto_enable = true,
+      }
+    end,
   },
 
   {

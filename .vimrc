@@ -11,14 +11,21 @@ set clipboard^=unnamed
 set virtualedit=onemore
 set scrolloff=5
 
+set wildmode=longest:full,full
+
 " set termguicolors
 set cursorline
 highlight CursorLine cterm=NONE guibg=#22262e
 
 highlight ExtraWhitespace ctermbg=red guibg=#5f2930
+" Highlight trailing whitespace on all lines by default
 match ExtraWhitespace /\s\+$/
+" When entering Insert mode, ignore whitespace at the cursor position
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+" When leaving Insert mode, highlight all trailing whitespace again
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
-set colorcolumn=80
+set colorcolumn=80,+0
 
 if has("vms")
   " do not keep a backup file, use versions instead
@@ -105,7 +112,9 @@ set shiftwidth=2
 set expandtab
 set number
 
-set timeoutlen=100
+" Mapping timeout
+set timeoutlen=3000
+" Escape sequence timeout
 set ttimeoutlen=50
 
 set ignorecase

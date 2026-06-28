@@ -77,9 +77,9 @@ if [[ $- == *i* ]]; then
     source ~/.zsh_prompt
   fi
 
-  export EDITOR=vim
-  export VISUAL="code --wait"
-  export GIT_EDITOR="code --wait"
+  export EDITOR=nvim
+  export VISUAL=nvim
+  export GIT_EDITOR=nvim
 
   export LSCOLORS="dxgxcxdxbxegedabagacad"
 fi
