@@ -299,13 +299,23 @@ fi
 output=""
 separator="${GRAY} · ${RESET}"
 
+function effort_color() {
+  local effort_level=$1
+  case "$effort_level" in
+    low) echo "${RESET}" ;;
+    medium) echo "${YELLOW}" ;;
+    high) echo "${YELLOW_ORANGE}" ;;
+    *) echo "${RED}" ;;
+  esac
+}
+
 # Build top line: model, context, effort
 top_parts=()
 if [ -n "$model" ]; then
   model_str="${GRAY}${model}${RESET}"
 
   if [ -n "$effort" ]; then
-    model_str+=" ${GRAY}(${RESET}${effort}${GRAY})${RESET}"
+    model_str+=" ${GRAY}($(effort_color "$effort")${effort}${GRAY})${RESET}"
   fi
 
   top_parts+=("$model_str")
