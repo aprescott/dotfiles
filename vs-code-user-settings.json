@@ -203,6 +203,9 @@
     },
     "rubyLsp.featureFlags": {
         "launcher": false,
+        "rubyLsp.featureFlags": {
+            "fullTestDiscovery": false,
+        }
     },
 
     "tailwind-fold.autoFold": false,
@@ -243,4 +246,7 @@
     "chat.experimental.incrementalRendering.enabled": true,
     "chat.experimental.incrementalRendering.animationStyle": "blur",
     "github.copilot.chat.localIndex.enabled": true,
+
+    "editor.cursorSurroundingLines": 5,
+    "editor.cursorSurroundingLinesStyle": "all",
 }
