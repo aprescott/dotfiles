@@ -22,6 +22,16 @@ mkdir -p .emacs.d/lock-files
 ln -s ../dotfiles/.emacs.d/init.el .emacs.d/init.el
 ```
 
+```bash
+# macOS
+
+# For tree-sitter
+brew install tree-sitter-cli
+
+# For LSP
+brew install typescript typescript-language-server
+```
+
 `bin/` files:
 
 ```bash

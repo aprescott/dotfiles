@@ -59,6 +59,7 @@ return {
         position = "float",
       },
       filesystem = {
+        hijack_netrw_behavior = "disabled",
         filtered_items = {
           visible = true,
         },
@@ -118,6 +119,7 @@ return {
 
   {
     "ibhagwan/fzf-lua",
+    lazy = false,
     -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
     -- or if using mini.icons/mini.nvim
