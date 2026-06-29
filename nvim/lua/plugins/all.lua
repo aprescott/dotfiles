@@ -162,6 +162,72 @@ return {
     },
   },
   { "lewis6991/gitsigns.nvim" },
+  { "HiPhish/rainbow-delimiters.nvim" },
+  {
+    "NvChad/nvim-colorizer.lua",
+    opts = {
+      user_default_options = {
+        mode     = "background",
+
+        RGB      = true;  -- #RGB hex codes
+        RRGGBB   = true;  -- #RRGGBB hex codes
+        names    = true;  -- "Name" codes like Blue
+        RRGGBBAA = true; -- #RRGGBBAA hex codes
+        rgb_fn   = true; -- CSS rgb() and rgba() functions
+        hsl_fn   = true; -- CSS hsl() and hsla() functions
+        css      = true; -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn   = true; -- Enable all CSS *functions*: rgb_fn, hsl_fn
+      },
+    },
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    -- rainbow-delimiters.nvim integration, per the ibl README
+    config = function()
+      local highlight = {
+        "RainbowRed",
+        "RainbowYellow",
+        "RainbowBlue",
+        "RainbowOrange",
+        "RainbowGreen",
+        "RainbowViolet",
+        "RainbowCyan",
+      }
+      local highlight_active = {
+        "RainbowRedActive",
+        "RainbowYellowActive",
+        "RainbowBlueActive",
+        "RainbowOrangeActive",
+        "RainbowGreenActive",
+        "RainbowVioletActive",
+        "RainbowCyanActive",
+      }
+      local hooks = require("ibl.hooks")
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+        vim.api.nvim_set_hl(0, "RainbowRed",          { fg = "#5c3035" })
+        vim.api.nvim_set_hl(0, "RainbowYellow",       { fg = "#5c4e2e" })
+        vim.api.nvim_set_hl(0, "RainbowBlue",         { fg = "#2a4a6b" })
+        vim.api.nvim_set_hl(0, "RainbowOrange",       { fg = "#5c3f20" })
+        vim.api.nvim_set_hl(0, "RainbowGreen",        { fg = "#2e4a2e" })
+        vim.api.nvim_set_hl(0, "RainbowViolet",       { fg = "#4a2e5c" })
+        vim.api.nvim_set_hl(0, "RainbowCyan",         { fg = "#1e4a4a" })
+        vim.api.nvim_set_hl(0, "RainbowRedActive",    { fg = "#E06C75" })
+        vim.api.nvim_set_hl(0, "RainbowYellowActive", { fg = "#E5C07B" })
+        vim.api.nvim_set_hl(0, "RainbowBlueActive",   { fg = "#61AFEF" })
+        vim.api.nvim_set_hl(0, "RainbowOrangeActive", { fg = "#D19A66" })
+        vim.api.nvim_set_hl(0, "RainbowGreenActive",  { fg = "#98C379" })
+        vim.api.nvim_set_hl(0, "RainbowVioletActive", { fg = "#C678DD" })
+        vim.api.nvim_set_hl(0, "RainbowCyanActive",   { fg = "#56B6C2" })
+      end)
+      vim.g.rainbow_delimiters = { highlight = highlight_active }
+      require("ibl").setup({ indent = { highlight = highlight, char = "▏" }, scope = { highlight = highlight_active } })
+      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+    end,
+  },
+  { "nvim-treesitter/nvim-treesitter-context" },
   { "neovim/nvim-lspconfig" },
   {
     "folke/todo-comments.nvim",
@@ -176,6 +242,7 @@ return {
   ---@module "neominimap.config.meta"
   {
     "Isrothy/neominimap.nvim",
+    enabled = false,
     version = "v3.x.x",
     lazy = false, -- NOTE: NO NEED to Lazy load
     -- Optional. You can also set your own keybindings
@@ -218,6 +285,7 @@ return {
       ---@type Neominimap.UserConfig
       vim.g.neominimap = {
         auto_enable = true,
+        float = { z_index = 100 },
       }
     end,
   },
